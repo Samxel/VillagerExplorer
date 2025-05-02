@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="(https://github.com/user-attachments/assets/4211dcf6-8139-40d6-8d67-aa68e27a6aa9" alt="villagerexplorer_header""/>
+  <img src="https://github.com/user-attachments/assets/c3c52df9-fb44-42e5-8653-2c1a0a9b5cd8" alt="villagerexplorer_header" width="256""/>
 </p>
 
 <p align="center">
