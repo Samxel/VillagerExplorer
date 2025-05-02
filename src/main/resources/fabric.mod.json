@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "villagerexplorer",
+  "version": "${version}",
+  "name": "VillagerExplorer",
+  "description": "Explore villager's trades & job stations",
+  "authors": ["Samxel"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/villagerexplorer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.samxel.villagerexplorer.client.VillagerExplorerClient"
+    ],
+    "main": [
+      "com.samxel.villagerexplorer.VillagerExplorer"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
