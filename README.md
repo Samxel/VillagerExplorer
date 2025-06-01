@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.curseforge.com/minecraft/mc-mods/villager-explorer">Villager Explorer on CurseForge</a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/villagerexplorer">Villager Explorer on CurseForge</a>
 </p>
 
 <h1 align="center">Villager Explorer<br>1.21.5</h1>
