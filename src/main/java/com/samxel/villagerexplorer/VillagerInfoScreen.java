@@ -52,13 +52,13 @@ public class VillagerInfoScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
         List<VillagerTrades.Trade> trades = VillagerTrades.getTradesForVillager(this.villagerName);
         int maxOffset = Math.max(0, trades.size() - TRADES_VISIBLE);
 
-        if (verticalAmount < 0) {
+        if (amount < 0) {
             tradeScrollOffset = Math.min(tradeScrollOffset + 1, maxOffset);
-        } else if (verticalAmount > 0) {
+        } else if (amount > 0) {
             tradeScrollOffset = Math.max(tradeScrollOffset - 1, 0);
         }
         return true;

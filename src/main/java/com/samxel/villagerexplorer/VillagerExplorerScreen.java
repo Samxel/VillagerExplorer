@@ -86,13 +86,14 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-        if (maxScroll > 0 && verticalAmount != 0) {
-            scrollOffset -= (int) Math.signum(verticalAmount);
-            scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
+    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+        if (maxScroll > 0 && amount != 0.0D) {
+            scrollOffset -= (int) Math.signum(amount);
+            if (scrollOffset < 0) scrollOffset = 0;
+            else if (scrollOffset > maxScroll) scrollOffset = maxScroll;
             return true;
         }
-        return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
+        return super.mouseScrolled(mouseX, mouseY, amount);
     }
 
     @Override
