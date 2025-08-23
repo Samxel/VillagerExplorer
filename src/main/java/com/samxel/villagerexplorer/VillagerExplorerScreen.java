@@ -277,13 +277,14 @@ public class VillagerExplorerScreen extends Screen {
         VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
 
         @SuppressWarnings("unchecked")
-        EntityRenderer<VillagerEntity, ?> renderer =
-                (EntityRenderer<VillagerEntity, ?>) dispatcher.getRenderer(entity);
+        EntityRenderer<? super VillagerEntity> renderer =
+                (EntityRenderer<? super VillagerEntity>) dispatcher.getRenderer(entity);
 
         dispatcher.render(
                 entity,
-                0, 0, 0,
-                0,
+                0., 0., 0.,
+                0.0f,
+                client.getTickDelta(),
                 matrices,
                 vertexConsumers,
                 15728880

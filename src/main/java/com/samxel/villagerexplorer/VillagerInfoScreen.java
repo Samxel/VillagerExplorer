@@ -300,47 +300,60 @@ public class VillagerInfoScreen extends Screen {
         float i = (float) Math.atan((g - mouseX) / 40.0F);
         float j = (float) Math.atan((h - mouseY) / 40.0F);
 
-        Quaternionf quaternionf = (new Quaternionf()).rotateZ((float) Math.PI);
-        Quaternionf quaternionf2 = (new Quaternionf()).rotateX(j * 20.0F * ((float) Math.PI / 180F));
-        quaternionf.mul(quaternionf2);
-
+        // Save rotations
         float k = entity.bodyYaw;
         float l = entity.getYaw();
         float m = entity.getPitch();
-        float n = entity.lastHeadYaw;
+        float n = entity.prevHeadYaw;
         float o = entity.headYaw;
 
+        // Aim the model toward the mouse
         entity.bodyYaw = 180.0F + i * 20.0F;
         entity.setYaw(180.0F + i * 40.0F);
         entity.setPitch(-j * 20.0F);
         entity.headYaw = entity.getYaw();
-        entity.lastHeadYaw = entity.getYaw();
+        entity.prevHeadYaw = entity.getYaw();
 
-        float p = entity.getScale();
-        Vector3f vector3f = new Vector3f(0.0F, entity.getHeight() / 2.0F, 0.0F);
-        float q = (float) size / p;
+        var mc = MinecraftClient.getInstance();
+        var dispatcher = mc.getEntityRenderDispatcher();
+        var matrices = context.getMatrices();
+        var vcp = mc.getBufferBuilders().getEntityVertexConsumers();
 
+        // ---- matrix setup (GUI space) ----
+        matrices.push();
+        matrices.translate(g, h, 50.0D);
 
-        context.getMatrices().push();
-        context.getMatrices().translate(g, (double) h, 50.0F);
-        context.getMatrices().scale(q, q, -q);
-        context.getMatrices().translate(vector3f.x, vector3f.y, vector3f.z);
-        context.getMatrices().multiply(quaternionf);
-        context.draw();
-        var dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
+        // Scale: 24 is a good base for humanoids in GUI
+        float s = (float) size / 24.0F;
+        matrices.scale(s, s, -s);
+
+        // Lift to model center and rotate to face the camera, then pitch with mouse
+        matrices.translate(0.0F, entity.getHeight() * 0.5F, 0.0F);
+        matrices.multiply(new org.joml.Quaternionf().rotateZ((float) Math.PI));
+        matrices.multiply(new org.joml.Quaternionf().rotateX(j * 20.0F * ((float) Math.PI / 180F)));
+
+        // Render (needs yaw + tickDelta floats)
         dispatcher.setRenderShadows(false);
-        context.draw((vertexConsumers) -> dispatcher.render(entity, 0.0, 0.0, 0.0, 1.0F, context.getMatrices(), vertexConsumers, 15728880));
-        context.draw();
+        dispatcher.render(
+            entity,
+            0.0, 0.0, 0.0,                    // x, y, z
+            0.0F,                              // entity yaw (unused here)
+            mc.getTickDelta(),                 // tickDelta
+            matrices,
+            vcp,
+            net.minecraft.client.render.LightmapTextureManager.MAX_LIGHT_COORDINATE
+        );
+        vcp.draw();
         dispatcher.setRenderShadows(true);
-        context.getMatrices().pop();
+        matrices.pop();
 
-
+        // Restore rotations
         entity.bodyYaw = k;
         entity.setYaw(l);
         entity.setPitch(m);
-        entity.lastHeadYaw = n;
+        entity.prevHeadYaw = n;
         entity.headYaw = o;
-    }
+}
 
 
     private List<GridItem> getJobBlockRecipe(String profession) {
