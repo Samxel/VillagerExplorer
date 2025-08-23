@@ -1,8 +1,10 @@
 package com.samxel.villagerexplorer;
 
-import net.minecraft.component.DataComponentTypes;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 
 import java.util.List;
 import java.util.Map;
@@ -321,9 +323,16 @@ public class VillagerTrades {
     }
 
     public static ItemStack enchantedGlint(ItemStack stack) {
-        stack.set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
+       // Add Unbreaking I
+        EnchantmentHelper.set(Map.of(Enchantments.UNBREAKING, 1), stack);
+
+        // Hide enchantments in tooltip
+        NbtCompound nbt = stack.getOrCreateNbt();
+        int hide = nbt.getInt("HideFlags");
+        nbt.putInt("HideFlags", hide | 0x01); // 0x01 = hide enchantments
+
         return stack;
-    }
+  }
 }
 
 
