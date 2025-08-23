@@ -94,7 +94,7 @@ public class VillagerTrades {
                     new Trade("Journeyman", List.of(new ItemStack(Items.RABBIT_FOOT, 2)), List.of(new ItemStack(Items.EMERALD))),
                     new Trade("Journeyman", List.of(new ItemStack(Items.EMERALD, 4)), List.of(new ItemStack(Items.GLOWSTONE))),
 
-                    new Trade("Expert", List.of(new ItemStack(Items.TURTLE_SCUTE, 4)), List.of(new ItemStack(Items.EMERALD))),
+                    new Trade("Expert", List.of(new ItemStack(Items.SCUTE, 4)), List.of(new ItemStack(Items.EMERALD))),
                     new Trade("Expert", List.of(new ItemStack(Items.GLASS_BOTTLE, 9)), List.of(new ItemStack(Items.EMERALD))),
                     new Trade("Expert", List.of(new ItemStack(Items.EMERALD, 5)), List.of(new ItemStack(Items.ENDER_PEARL))),
 
@@ -185,7 +185,7 @@ public class VillagerTrades {
                     new Trade("Journeyman", List.of(new ItemStack(Items.RABBIT_HIDE, 9)), List.of(new ItemStack(Items.EMERALD))),
                     new Trade("Journeyman", List.of(new ItemStack(Items.EMERALD, 7)), List.of(new ItemStack(Items.LEATHER_CHESTPLATE))),
 
-                    new Trade("Expert", List.of(new ItemStack(Items.TURTLE_SCUTE, 4)), List.of(new ItemStack(Items.EMERALD))),
+                    new Trade("Expert", List.of(new ItemStack(Items.SCUTE, 4)), List.of(new ItemStack(Items.EMERALD))),
                     new Trade("Expert", List.of(new ItemStack(Items.EMERALD, 6)), List.of(new ItemStack(Items.LEATHER_HORSE_ARMOR))),
 
                     new Trade("Master", List.of(new ItemStack(Items.EMERALD, 6)), List.of(new ItemStack(Items.LEATHER_HELMET))),
