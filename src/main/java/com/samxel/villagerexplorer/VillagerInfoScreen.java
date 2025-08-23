@@ -102,7 +102,7 @@ public class VillagerInfoScreen extends Screen {
 
 
         MinecraftClient client = MinecraftClient.getInstance();
-        VillagerEntity villager = EntityType.VILLAGER.create(client.world, SpawnReason.TRIGGERED);
+        VillagerEntity villager = EntityType.VILLAGER.create(client.world);
         if (villager != null) {
             villager.setVillagerData(
                     villager.getVillagerData().withProfession(VillagerUtils.getProfessionByName(this.villagerName))

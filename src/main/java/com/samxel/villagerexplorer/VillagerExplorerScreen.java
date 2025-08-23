@@ -238,7 +238,7 @@ public class VillagerExplorerScreen extends Screen {
 
     private void renderVillagerInBox(int x, int y, int scale, String villagerName) {
         MinecraftClient client = MinecraftClient.getInstance();
-        VillagerEntity villager = EntityType.VILLAGER.create(client.world, SpawnReason.TRIGGERED);
+        VillagerEntity villager = EntityType.VILLAGER.create(client.world);
         if (villager == null) return;
 
         villager.setVillagerData(
