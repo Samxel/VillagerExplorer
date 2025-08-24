@@ -52,13 +52,13 @@ public class VillagerInfoScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
         List<VillagerTrades.Trade> trades = VillagerTrades.getTradesForVillager(this.villagerName);
         int maxOffset = Math.max(0, trades.size() - TRADES_VISIBLE);
 
-        if (verticalAmount < 0) {
+        if (amount < 0) {
             tradeScrollOffset = Math.min(tradeScrollOffset + 1, maxOffset);
-        } else if (verticalAmount > 0) {
+        } else if (amount > 0) {
             tradeScrollOffset = Math.max(tradeScrollOffset - 1, 0);
         }
         return true;
@@ -102,10 +102,10 @@ public class VillagerInfoScreen extends Screen {
 
 
         MinecraftClient client = MinecraftClient.getInstance();
-        VillagerEntity villager = EntityType.VILLAGER.create(client.world, SpawnReason.TRIGGERED);
+        VillagerEntity villager = EntityType.VILLAGER.create(client.world);
         if (villager != null) {
             villager.setVillagerData(
-                    villager.getVillagerData().withProfession(getProfessionByName(this.villagerName))
+                    villager.getVillagerData().withProfession(VillagerUtils.getProfessionByName(this.villagerName))
             );
             drawEntityFollowingMouse(context, villagerX, villagerY, villagerScale, mouseX, mouseY, villager);
         }
@@ -300,79 +300,61 @@ public class VillagerInfoScreen extends Screen {
         float i = (float) Math.atan((g - mouseX) / 40.0F);
         float j = (float) Math.atan((h - mouseY) / 40.0F);
 
-        Quaternionf quaternionf = (new Quaternionf()).rotateZ((float) Math.PI);
-        Quaternionf quaternionf2 = (new Quaternionf()).rotateX(j * 20.0F * ((float) Math.PI / 180F));
-        quaternionf.mul(quaternionf2);
-
+        // Save rotations
         float k = entity.bodyYaw;
         float l = entity.getYaw();
         float m = entity.getPitch();
-        float n = entity.lastHeadYaw;
+        float n = entity.prevHeadYaw;
         float o = entity.headYaw;
 
+        // Aim the model toward the mouse
         entity.bodyYaw = 180.0F + i * 20.0F;
         entity.setYaw(180.0F + i * 40.0F);
         entity.setPitch(-j * 20.0F);
         entity.headYaw = entity.getYaw();
-        entity.lastHeadYaw = entity.getYaw();
+        entity.prevHeadYaw = entity.getYaw();
 
-        float p = entity.getScale();
-        Vector3f vector3f = new Vector3f(0.0F, entity.getHeight() / 2.0F, 0.0F);
-        float q = (float) size / p;
+        var mc = MinecraftClient.getInstance();
+        var dispatcher = mc.getEntityRenderDispatcher();
+        var matrices = context.getMatrices();
+        var vcp = mc.getBufferBuilders().getEntityVertexConsumers();
 
+        // ---- matrix setup (GUI space) ----
+        matrices.push();
+        matrices.translate(g, h, 50.0D);
 
-        context.getMatrices().push();
-        context.getMatrices().translate(g, (double) h, 50.0F);
-        context.getMatrices().scale(q, q, -q);
-        context.getMatrices().translate(vector3f.x, vector3f.y, vector3f.z);
-        context.getMatrices().multiply(quaternionf);
-        context.draw();
-        var dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
+        // Scale: 24 is a good base for humanoids in GUI
+        float s = (float) size / 24.0F;
+        matrices.scale(s, s, -s);
+
+        // Lift to model center and rotate to face the camera, then pitch with mouse
+        matrices.translate(0.0F, entity.getHeight() * 0.5F, 0.0F);
+        matrices.multiply(new org.joml.Quaternionf().rotateZ((float) Math.PI));
+        matrices.multiply(new org.joml.Quaternionf().rotateX(j * 20.0F * ((float) Math.PI / 180F)));
+
+        // Render (needs yaw + tickDelta floats)
         dispatcher.setRenderShadows(false);
-        context.draw((vertexConsumers) -> dispatcher.render(entity, 0.0, 0.0, 0.0, 1.0F, context.getMatrices(), vertexConsumers, 15728880));
-        context.draw();
+        dispatcher.render(
+            entity,
+            0.0, 0.0, 0.0,                    // x, y, z
+            0.0F,                              // entity yaw (unused here)
+            mc.getTickDelta(),                 // tickDelta
+            matrices,
+            vcp,
+            net.minecraft.client.render.LightmapTextureManager.MAX_LIGHT_COORDINATE
+        );
+        vcp.draw();
         dispatcher.setRenderShadows(true);
-        context.getMatrices().pop();
+        matrices.pop();
 
-
+        // Restore rotations
         entity.bodyYaw = k;
         entity.setYaw(l);
         entity.setPitch(m);
-        entity.lastHeadYaw = n;
+        entity.prevHeadYaw = n;
         entity.headYaw = o;
-    }
+}
 
-    private static RegistryEntry<VillagerProfession> getProfessionByName(String name) {
-        return switch (name.toLowerCase()) {
-            case "farmer" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.FARMER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "librarian" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.LIBRARIAN.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "cleric" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.CLERIC.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "armorer" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.ARMORER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "butcher" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.BUTCHER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "cartographer" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.CARTOGRAPHER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "fisherman" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.FISHERMAN.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "fletcher" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.FLETCHER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "leatherworker" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.LEATHERWORKER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "mason" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.MASON.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "shepherd" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.SHEPHERD.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "toolsmith" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.TOOLSMITH.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "weaponsmith" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.WEAPONSMITH.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            default -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get();
-        };
-    }
 
     private List<GridItem> getJobBlockRecipe(String profession) {
         List<GridItem> items = new ArrayList<>();

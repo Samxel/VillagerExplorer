@@ -6,7 +6,7 @@
   <a href="https://www.curseforge.com/minecraft/mc-mods/villagerexplorer">Villager Explorer on CurseForge</a>
 </p>
 
-<h1 align="center">Villager Explorer<br>1.21.5</h1>
+<h1 align="center">Villager Explorer<br>1.20.1</h1>
 
 <p align="center">
   <img src="https://img.shields.io/github/v/release/Samxel/villagerexplorer" alt="GitHub release">
@@ -53,8 +53,8 @@
 ## Installation
 
 1. **Requirements**
-   - Minecraft Fabric 1.21.5
-   - [Download the latest release](https://github.com/Samxel/villagerexplorer/releases) of the mod
+   - Minecraft Fabric 1.20.1
+   - \[PENDING\] [Download the latest release](https://github.com/Samxel/villagerexplorer/releases) of the mod 
 
 2. **Install the Mod**
    - Place the downloaded `.jar` file into your Minecraft `mods` folder.

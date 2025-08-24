@@ -86,13 +86,14 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-        if (maxScroll > 0 && verticalAmount != 0) {
-            scrollOffset -= (int) Math.signum(verticalAmount);
-            scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
+    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+        if (maxScroll > 0 && amount != 0.0D) {
+            scrollOffset -= (int) Math.signum(amount);
+            if (scrollOffset < 0) scrollOffset = 0;
+            else if (scrollOffset > maxScroll) scrollOffset = maxScroll;
             return true;
         }
-        return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
+        return super.mouseScrolled(mouseX, mouseY, amount);
     }
 
     @Override
@@ -237,11 +238,11 @@ public class VillagerExplorerScreen extends Screen {
 
     private void renderVillagerInBox(int x, int y, int scale, String villagerName) {
         MinecraftClient client = MinecraftClient.getInstance();
-        VillagerEntity villager = EntityType.VILLAGER.create(client.world, SpawnReason.TRIGGERED);
+        VillagerEntity villager = EntityType.VILLAGER.create(client.world);
         if (villager == null) return;
 
         villager.setVillagerData(
-                villager.getVillagerData().withProfession(getProfessionByName(villagerName))
+                villager.getVillagerData().withProfession(VillagerUtils.getProfessionByName(villagerName))
         );
 
 
@@ -249,38 +250,6 @@ public class VillagerExplorerScreen extends Screen {
         float pitch = -4f;
 
         renderEntityInGui(x, y, scale, yaw, pitch, villager);
-    }
-
-    private static RegistryEntry<VillagerProfession> getProfessionByName(String name) {
-        return switch (name.toLowerCase()) {
-            case "farmer" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.FARMER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "librarian" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.LIBRARIAN.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "cleric" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.CLERIC.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "armorer" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.ARMORER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "butcher" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.BUTCHER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "cartographer" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.CARTOGRAPHER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "fisherman" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.FISHERMAN.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "fletcher" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.FLETCHER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "leatherworker" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.LEATHERWORKER.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "mason" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.MASON.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "shepherd" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.SHEPHERD.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "toolsmith" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.TOOLSMITH.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            case "weaponsmith" -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.WEAPONSMITH.getValue())
-                    .orElse(Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get());
-            default -> Registries.VILLAGER_PROFESSION.getEntry(VillagerProfession.NONE.getValue()).get();
-        };
     }
 
     public static void renderEntityInGui(
@@ -308,13 +277,14 @@ public class VillagerExplorerScreen extends Screen {
         VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
 
         @SuppressWarnings("unchecked")
-        EntityRenderer<VillagerEntity, ?> renderer =
-                (EntityRenderer<VillagerEntity, ?>) dispatcher.getRenderer(entity);
+        EntityRenderer<? super VillagerEntity> renderer =
+                (EntityRenderer<? super VillagerEntity>) dispatcher.getRenderer(entity);
 
         dispatcher.render(
                 entity,
-                0, 0, 0,
-                0,
+                0., 0., 0.,
+                0.0f,
+                client.getTickDelta(),
                 matrices,
                 vertexConsumers,
                 15728880
