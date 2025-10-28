@@ -6,7 +6,7 @@
   <a href="https://www.curseforge.com/minecraft/mc-mods/villagerexplorer">Villager Explorer on CurseForge</a>
 </p>
 
-<h1 align="center">Villager Explorer<br>1.20.1</h1>
+<h1 align="center">Villager Explorer<br>1.21.10</h1>
 
 <p align="center">
   <strong>Villager Explorer</strong> is a client-side Minecraft mod that lets you view detailed information about villagers in a beautiful, interactive GUI. Instantly see a villager’s profession, job site block, and all available trades.<br><br>
