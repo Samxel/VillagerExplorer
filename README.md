@@ -9,12 +9,6 @@
 <h1 align="center">Villager Explorer<br>1.20.1</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/Samxel/villagerexplorer" alt="GitHub release">
-  <img src="https://img.shields.io/github/downloads/Samxel/villagerexplorer/total" alt="GitHub all releases">
-  <img src="https://img.shields.io/github/issues/Samxel/villagerexplorer" alt="GitHub issues">
-</p>
-
-<p align="center">
   <strong>Villager Explorer</strong> is a client-side Minecraft mod that lets you view detailed information about villagers in a beautiful, interactive GUI. Instantly see a villager’s profession, job site block, and all available trades.<br><br>
   Whether you’re a trading expert or just want to keep track of your villagers, Villager Explorer makes managing and understanding villagers easier than ever.<br>
 </p>
