@@ -2,16 +2,25 @@
   <img src="https://github.com/user-attachments/assets/c3c52df9-fb44-42e5-8653-2c1a0a9b5cd8" alt="villagerexplorer_header" width="256""/>
 </p>
 
+<h1 align="center">Villager Explorer<br>1.21.10</h1>
+
 <p align="center">
-  <a href="https://www.curseforge.com/minecraft/mc-mods/villagerexplorer">Villager Explorer on CurseForge</a>
+  <b>Available at:</b><br>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/villagerexplorer">
+    <img src="https://img.shields.io/badge/CurseForge-Download-orange?logo=curseforge&style=for-the-badge" alt="CurseForge">
+  </a>
+  <a href="https://modrinth.com/mod/villagerexplorer">
+    <img src="https://img.shields.io/badge/Modrinth-Download-brightgreen?logo=modrinth&style=for-the-badge" alt="Modrinth">
+  </a>
 </p>
 
-<h1 align="center">Villager Explorer<br>1.21.10</h1>
+---
 
 <p align="center">
   <strong>Villager Explorer</strong> is a client-side Minecraft mod that lets you view detailed information about villagers in a beautiful, interactive GUI. Instantly see a villager’s profession, job site block, and all available trades.<br><br>
   Whether you’re a trading expert or just want to keep track of your villagers, Villager Explorer makes managing and understanding villagers easier than ever.<br>
 </p>
+
 
 ---
 
