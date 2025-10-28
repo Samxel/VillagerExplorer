@@ -50,22 +50,7 @@
 
 ---
 
-## Installation
-
-1. **Requirements**
-   - Minecraft Fabric 1.20.1
-   - \[PENDING\] [Download the latest release](https://github.com/Samxel/villagerexplorer/releases) of the mod 
-
-2. **Install the Mod**
-   - Place the downloaded `.jar` file into your Minecraft `mods` folder.
-   - Make sure you have the correct modloader version installed.
-
----
-
 ## Configuration 🔧
 
 - **Keybinds**  
   You can configure the keybind via Minecraft’s controls menu.
-
-
-<p align="center">Made with Love ❤️</p>
