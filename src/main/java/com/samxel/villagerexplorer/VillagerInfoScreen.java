@@ -3,8 +3,8 @@ package com.samxel.villagerexplorer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,49 +13,34 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.village.VillagerProfession;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VillagerInfoScreen extends Screen {
+    private static final int TRADES_VISIBLE = 7;
     private final int windowWidth = 420;
     private final int windowHeight = 340;
-
     private final String villagerName;
-
-
     private int tradeScrollOffset = 0;
-    private static final int TRADES_VISIBLE = 7;
 
     public VillagerInfoScreen(String villagerName) {
         super(Text.of("Villager Info"));
         this.villagerName = villagerName;
     }
 
-    public static class GridItem {
-        public final ItemStack stack;
-        public final int row;
-        public final int col;
-
-        public GridItem(ItemStack stack, int row, int col) {
-            this.stack = stack;
-            this.row = row;
-            this.col = col;
-        }
-    }
-
     @Override
     protected void init() {
-
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
-        List<VillagerTrades.Trade> trades = VillagerTrades.getTradesForVillager(this.villagerName);
+    public boolean mouseScrolled(
+            double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
+        List<VillagerTrades.Trade> trades =
+                VillagerTrades.getTradesForVillager(this.villagerName);
         int maxOffset = Math.max(0, trades.size() - TRADES_VISIBLE);
 
+        double amount = verticalAmount != 0.0 ? verticalAmount : horizontalAmount;
         if (amount < 0) {
             tradeScrollOffset = Math.min(tradeScrollOffset + 1, maxOffset);
         } else if (amount > 0) {
@@ -64,10 +49,9 @@ public class VillagerInfoScreen extends Screen {
         return true;
     }
 
-
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
+
 
         int centerX = this.width / 2;
         int centerY = this.height / 2;
@@ -76,50 +60,65 @@ public class VillagerInfoScreen extends Screen {
 
 
         context.fill(windowX, windowY, windowX + windowWidth, windowY + windowHeight, 0xCC222222);
+        context.drawStrokedRectangle(windowX, windowY, windowWidth, windowHeight, 0xFF000000);
 
 
-        context.drawBorder(windowX, windowY, windowWidth, windowHeight, 0xFF000000);
-
-
-        context.getMatrices().push();
-        context.getMatrices().translate(windowX + 30, windowY + 70, 0);
-        float scale = 2.0f;
-        context.getMatrices().scale(scale, scale, 1.0f);
-        context.drawText(
-                this.textRenderer,
-                Text.of(this.villagerName),
-                0,
-                0,
-                0xFFFFFF,
-                false
-        );
-        context.getMatrices().pop();
+        context.drawText(this.textRenderer, Text.of(this.villagerName),
+                windowX + 30, windowY + 70, 0xFFFFFFFF, false);
 
 
         int villagerX = windowX + windowWidth - 70;
-        int villagerY = windowY + 120;
+        int villagerY = windowY + 150;
         int villagerScale = 45;
 
-
         MinecraftClient client = MinecraftClient.getInstance();
-        VillagerEntity villager = EntityType.VILLAGER.create(client.world);
-        if (villager != null) {
-            villager.setVillagerData(
-                    villager.getVillagerData().withProfession(VillagerUtils.getProfessionByName(this.villagerName))
-            );
-            drawEntityFollowingMouse(context, villagerX, villagerY, villagerScale, mouseX, mouseY, villager);
+        if (client.world != null) {
+            VillagerEntity villager = EntityType.VILLAGER.create(client.world, SpawnReason.TRIGGERED);
+            if (villager != null) {
+
+                VillagerProfession prof = VillagerUtils.getProfessionByName(this.villagerName);
+                RegistryEntry<VillagerProfession> profEntry = Registries.VILLAGER_PROFESSION.getEntry(prof);
+                villager.setVillagerData(villager.getVillagerData().withProfession(profEntry));
+
+
+                int x1 = villagerX - 25;
+                int y1 = villagerY - 190;
+                int x2 = villagerX + 25;
+                int y2 = villagerY + 90;
+
+
+                float mouseYaw = (float) Math.atan((villagerX - mouseX) / 40.0F);
+                float mousePitch = (float) Math.atan((villagerY - mouseY) / 40.0F);
+
+
+                villager.setBodyYaw(180.0F + mouseYaw * 20.0F);
+                villager.setHeadYaw(180.0F + mouseYaw * 40.0F);
+                villager.setPitch(mousePitch * 20.0F);
+
+                villager.lastBodyYaw = villager.getBodyYaw();
+                villager.lastHeadYaw = villager.getHeadYaw();
+                villager.lastPitch = villager.getPitch();
+
+
+                InventoryScreen.drawEntity(
+                        context,
+                        x1, y1, x2, y2,
+                        villagerScale, 1.0f,
+                        mouseX, mouseY,
+                        villager
+                );
+            }
         }
 
 
         List<VillagerTrades.Trade> trades = VillagerTrades.getTradesForVillager(this.villagerName);
 
-        int tableStartX = windowX + 30;
+        int tableStartX = windowX + 50;
         int tableStartY = windowY + 110;
         int levelWidth = 60;
         int itemSlotSize = 18;
         int itemSpacing = 4;
         int rowHeight = itemSlotSize + 6;
-
 
         int start = tradeScrollOffset;
         int end = Math.min(trades.size(), start + TRADES_VISIBLE);
@@ -129,16 +128,9 @@ public class VillagerInfoScreen extends Screen {
             VillagerTrades.Trade trade = trades.get(row);
             int y = tableStartY + (row - start) * rowHeight;
 
-
             if (!trade.level().equals(lastLevel)) {
-                context.drawText(
-                        this.textRenderer,
-                        Text.of(trade.level()),
-                        tableStartX,
-                        y + 4,
-                        0xFFFFFF,
-                        false
-                );
+
+                context.drawText(this.textRenderer, Text.of(trade.level()), tableStartX - 5, y + 4, 0xFFFFFFFF, false);
                 lastLevel = trade.level();
             }
 
@@ -147,88 +139,54 @@ public class VillagerInfoScreen extends Screen {
                 int slotX = tableStartX + levelWidth + i * (itemSlotSize + itemSpacing);
                 ItemStack stack = trade.wanted().get(i);
 
-
                 context.fill(slotX, y, slotX + itemSlotSize, y + itemSlotSize, 0xFF444444);
-                context.drawBorder(slotX, y, itemSlotSize, itemSlotSize, 0xFF000000);
-
-
-                context.drawItem(stack, slotX + 1, y + 1, 1);
+                context.drawStrokedRectangle(slotX, y, itemSlotSize, itemSlotSize, 0xFF000000);
+                context.drawItem(stack, slotX + 1, y + 1);
 
 
                 if (stack.getCount() > 1) {
-                    context.getMatrices().push();
-                    context.getMatrices().translate(0, 0, 200);
-                    context.drawText(
-                            this.textRenderer,
+                    context.drawText(this.textRenderer,
                             Text.of(Integer.toString(stack.getCount())),
-                            slotX + 2,
-                            y + itemSlotSize - 8,
-                            0xFFFFFF,
-                            true
-                    );
-                    context.getMatrices().pop();
+                            slotX + 2, y + itemSlotSize - 8, 0xFFFFFFFF, true);
                 }
 
 
-                if (
-                        mouseX >= slotX &&
-                                mouseX < slotX + itemSlotSize &&
-                                mouseY >= y &&
-                                mouseY < y + itemSlotSize
-                ) {
+                if (mouseX >= slotX && mouseX < slotX + itemSlotSize && mouseY >= y && mouseY < y + itemSlotSize) {
                     context.drawItemTooltip(this.textRenderer, stack, slotX, y);
                 }
             }
 
-
             int arrowX = tableStartX + levelWidth + trade.wanted().size() * (itemSlotSize + itemSpacing) + 2;
-            context.drawText(this.textRenderer, Text.of("→"), arrowX, y + 5, 0xFFFFFF, false);
+            context.drawText(this.textRenderer, Text.of("→"), arrowX, y + 5, 0xFFFFFFFF, false);
 
 
             for (int i = 0; i < trade.given().size(); i++) {
                 int slotX = arrowX + 15 + i * (itemSlotSize + itemSpacing);
                 ItemStack stack = trade.given().get(i);
 
-
                 context.fill(slotX, y, slotX + itemSlotSize, y + itemSlotSize, 0xFF444444);
-                context.drawBorder(slotX, y, itemSlotSize, itemSlotSize, 0xFF000000);
-
-
-                context.drawItem(stack, slotX + 1, y + 1, 1);
-
+                context.drawStrokedRectangle(slotX, y, itemSlotSize, itemSlotSize, 0xFF000000);
+                context.drawItem(stack, slotX + 1, y + 1);
 
                 if (stack.getCount() > 1) {
-                    context.getMatrices().push();
-                    context.getMatrices().translate(0, 0, 200);
-                    context.drawText(
-                            this.textRenderer,
+                    context.drawText(this.textRenderer,
                             Text.of(Integer.toString(stack.getCount())),
-                            slotX + 2,
-                            y + itemSlotSize - 8,
-                            0xFFFFFF,
-                            true
-                    );
-                    context.getMatrices().pop();
+                            slotX + 2, y + itemSlotSize - 8, 0xFFFFFFFF, true);
                 }
 
-
-                if (
-                        mouseX >= slotX &&
-                                mouseX < slotX + itemSlotSize &&
-                                mouseY >= y &&
-                                mouseY < y + itemSlotSize
-                ) {
+                if (mouseX >= slotX && mouseX < slotX + itemSlotSize && mouseY >= y && mouseY < y + itemSlotSize) {
                     context.drawItemTooltip(this.textRenderer, stack, slotX, y);
                 }
             }
-
         }
 
+
         if (trades.size() > TRADES_VISIBLE) {
-            int barHeight = (int) ((float) TRADES_VISIBLE / trades.size() * (TRADES_VISIBLE * rowHeight));
-            int barY = tableStartY + (int) ((float) tradeScrollOffset / trades.size() * (TRADES_VISIBLE * rowHeight));
+            int barArea = TRADES_VISIBLE * rowHeight;
+            int barHeight = (int) ((float) TRADES_VISIBLE / trades.size() * barArea);
+            int barY = tableStartY + (int) ((float) tradeScrollOffset / trades.size() * barArea);
             int barX = tableStartX + 230;
-            context.fill(barX, tableStartY, barX + 6, tableStartY + TRADES_VISIBLE * rowHeight, 0xFF222222);
+            context.fill(barX, tableStartY, barX + 6, tableStartY + barArea, 0xFF222222);
             context.fill(barX, barY, barX + 6, barY + barHeight, 0xFF888888);
         }
 
@@ -237,30 +195,29 @@ public class VillagerInfoScreen extends Screen {
         int gridX = windowX + windowWidth - 120;
         int gridY = windowY + windowHeight - (gridSize * 3) - 60;
 
-
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                int slotX = gridX + col * gridSize;
-                int slotY = gridY + row * gridSize;
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                int slotX = gridX + c * gridSize;
+                int slotY = gridY + r * gridSize;
                 context.fill(slotX, slotY, slotX + gridSize, slotY + gridSize, 0xFF444444);
-                context.drawBorder(slotX, slotY, gridSize, gridSize, 0xFF000000);
+                context.drawStrokedRectangle(slotX, slotY, gridSize, gridSize, 0xFF000000);
             }
         }
-
 
         List<GridItem> gridItems = getJobBlockRecipe(this.villagerName);
         for (GridItem gridItem : gridItems) {
             int slotX = gridX + gridItem.col * gridSize;
             int slotY = gridY + gridItem.row * gridSize;
-            context.drawItem(gridItem.stack, slotX + 1, slotY + 1, 1);
+            context.drawItem(gridItem.stack, slotX + 1, slotY + 1);
 
             if (mouseX >= slotX && mouseX < slotX + gridSize && mouseY >= slotY && mouseY < slotY + gridSize) {
                 context.drawItemTooltip(this.textRenderer, gridItem.stack, slotX, slotY);
             }
         }
+
         int arrowX = gridX + gridSize * 4;
         int arrowY = gridY + gridSize;
-        context.drawText(this.textRenderer, Text.of("→"), arrowX - 10, arrowY + 5, 0xFFFFFF, false);
+        context.drawText(this.textRenderer, Text.of("→"), arrowX - 10, arrowY + 5, 0xFFFFFFFF, false);
 
 
         ItemStack resultStack = switch (villagerName.toLowerCase()) {
@@ -279,88 +236,24 @@ public class VillagerInfoScreen extends Screen {
             case "weaponsmith" -> new ItemStack(Items.GRINDSTONE);
             default -> ItemStack.EMPTY;
         };
+
         if (!resultStack.isEmpty()) {
             int resultX = gridX + gridSize * 4 + 5;
             int resultY = gridY + gridSize;
-            context.drawItem(resultStack, resultX, resultY, 1);
+            context.drawItem(resultStack, resultX, resultY);
             if (mouseX >= resultX && mouseX < resultX + gridSize && mouseY >= resultY && mouseY < resultY + gridSize) {
                 context.drawItemTooltip(this.textRenderer, resultStack, resultX, resultY);
             }
         }
+
+
+        super.render(context, mouseX, mouseY, delta);
     }
-
-    public static void drawEntityFollowingMouse(
-            DrawContext context,
-            int x, int y, int size,
-            float mouseX, float mouseY,
-            LivingEntity entity
-    ) {
-        float g = x;
-        float h = y;
-        float i = (float) Math.atan((g - mouseX) / 40.0F);
-        float j = (float) Math.atan((h - mouseY) / 40.0F);
-
-        // Save rotations
-        float k = entity.bodyYaw;
-        float l = entity.getYaw();
-        float m = entity.getPitch();
-        float n = entity.prevHeadYaw;
-        float o = entity.headYaw;
-
-        // Aim the model toward the mouse
-        entity.bodyYaw = 180.0F + i * 20.0F;
-        entity.setYaw(180.0F + i * 40.0F);
-        entity.setPitch(-j * 20.0F);
-        entity.headYaw = entity.getYaw();
-        entity.prevHeadYaw = entity.getYaw();
-
-        var mc = MinecraftClient.getInstance();
-        var dispatcher = mc.getEntityRenderDispatcher();
-        var matrices = context.getMatrices();
-        var vcp = mc.getBufferBuilders().getEntityVertexConsumers();
-
-        // ---- matrix setup (GUI space) ----
-        matrices.push();
-        matrices.translate(g, h, 50.0D);
-
-        // Scale: 24 is a good base for humanoids in GUI
-        float s = (float) size / 24.0F;
-        matrices.scale(s, s, -s);
-
-        // Lift to model center and rotate to face the camera, then pitch with mouse
-        matrices.translate(0.0F, entity.getHeight() * 0.5F, 0.0F);
-        matrices.multiply(new org.joml.Quaternionf().rotateZ((float) Math.PI));
-        matrices.multiply(new org.joml.Quaternionf().rotateX(j * 20.0F * ((float) Math.PI / 180F)));
-
-        // Render (needs yaw + tickDelta floats)
-        dispatcher.setRenderShadows(false);
-        dispatcher.render(
-            entity,
-            0.0, 0.0, 0.0,                    // x, y, z
-            0.0F,                              // entity yaw (unused here)
-            mc.getTickDelta(),                 // tickDelta
-            matrices,
-            vcp,
-            net.minecraft.client.render.LightmapTextureManager.MAX_LIGHT_COORDINATE
-        );
-        vcp.draw();
-        dispatcher.setRenderShadows(true);
-        matrices.pop();
-
-        // Restore rotations
-        entity.bodyYaw = k;
-        entity.setYaw(l);
-        entity.setPitch(m);
-        entity.prevHeadYaw = n;
-        entity.headYaw = o;
-}
-
 
     private List<GridItem> getJobBlockRecipe(String profession) {
         List<GridItem> items = new ArrayList<>();
         switch (profession.toLowerCase()) {
             case "farmer" -> {
-
                 ItemStack slab = new ItemStack(Items.OAK_SLAB);
                 items.add(new GridItem(slab, 0, 0));
                 items.add(new GridItem(slab, 0, 2));
@@ -371,7 +264,6 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(slab, 2, 2));
             }
             case "librarian" -> {
-
                 items.add(new GridItem(new ItemStack(Items.OAK_SLAB), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.OAK_SLAB), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.OAK_SLAB), 0, 2));
@@ -379,14 +271,12 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.OAK_SLAB), 2, 1));
             }
             case "cleric" -> {
-
                 items.add(new GridItem(new ItemStack(Items.BLAZE_ROD), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.COBBLESTONE), 1, 0));
                 items.add(new GridItem(new ItemStack(Items.COBBLESTONE), 1, 1));
                 items.add(new GridItem(new ItemStack(Items.COBBLESTONE), 1, 2));
             }
             case "armorer" -> {
-
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 2));
@@ -398,7 +288,6 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.SMOOTH_STONE), 2, 2));
             }
             case "butcher" -> {
-
                 items.add(new GridItem(new ItemStack(Items.OAK_LOG), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.OAK_LOG), 1, 0));
                 items.add(new GridItem(new ItemStack(Items.FURNACE), 1, 1));
@@ -406,7 +295,6 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.OAK_LOG), 2, 1));
             }
             case "cartographer" -> {
-
                 items.add(new GridItem(new ItemStack(Items.PAPER), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.PAPER), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 1, 0));
@@ -415,7 +303,6 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 2, 1));
             }
             case "fisherman" -> {
-
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.OAK_SLAB), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 0, 2));
@@ -426,7 +313,6 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 2, 2));
             }
             case "fletcher" -> {
-
                 items.add(new GridItem(new ItemStack(Items.FLINT), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.FLINT), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 1, 0));
@@ -435,7 +321,6 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 2, 1));
             }
             case "leatherworker" -> {
-
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 2));
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 1, 0));
@@ -445,21 +330,18 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 2, 2));
             }
             case "mason" -> {
-
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.STONE), 1, 0));
                 items.add(new GridItem(new ItemStack(Items.STONE), 1, 1));
                 items.add(new GridItem(new ItemStack(Items.STONE), 1, 2));
             }
             case "shepherd" -> {
-
                 items.add(new GridItem(new ItemStack(Items.STRING), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.STRING), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 1, 0));
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 1, 1));
             }
             case "toolsmith" -> {
-
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.IRON_INGOT), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 1, 0));
@@ -468,7 +350,6 @@ public class VillagerInfoScreen extends Screen {
                 items.add(new GridItem(new ItemStack(Items.OAK_PLANKS), 2, 1));
             }
             case "weaponsmith" -> {
-
                 items.add(new GridItem(new ItemStack(Items.STICK), 0, 0));
                 items.add(new GridItem(new ItemStack(Items.STONE_SLAB), 0, 1));
                 items.add(new GridItem(new ItemStack(Items.STICK), 0, 2));
@@ -479,5 +360,17 @@ public class VillagerInfoScreen extends Screen {
             }
         }
         return items;
+    }
+
+    public static class GridItem {
+        public final ItemStack stack;
+        public final int row;
+        public final int col;
+
+        public GridItem(ItemStack stack, int row, int col) {
+            this.stack = stack;
+            this.row = row;
+            this.col = col;
+        }
     }
 }

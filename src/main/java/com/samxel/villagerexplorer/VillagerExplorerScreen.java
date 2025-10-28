@@ -1,50 +1,98 @@
 package com.samxel.villagerexplorer;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.input.CharInput;
+import net.minecraft.client.input.KeyInput;
+import net.minecraft.client.render.entity.EntityRenderManager;
 import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.village.VillagerProfession;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class VillagerExplorerScreen extends Screen {
-    private TextFieldWidget searchField;
-    private final List<String> allVillagers = List.of(
-            "Farmer", "Librarian", "Cleric", "Armorer", "Butcher", "Cartographer", "Fisherman", "Fletcher", "Leatherworker", "Mason", "Shepherd", "Toolsmith", "Weaponsmith"
-    );
-    private List<String> filteredVillagers = new ArrayList<>();
-
-
+    private final List<String> allVillagers =
+            List.of(
+                    "Farmer",
+                    "Librarian",
+                    "Cleric",
+                    "Armorer",
+                    "Butcher",
+                    "Cartographer",
+                    "Fisherman",
+                    "Fletcher",
+                    "Leatherworker",
+                    "Mason",
+                    "Shepherd",
+                    "Toolsmith",
+                    "Weaponsmith");
     private final int windowWidth = 420;
     private final int windowHeight = 340;
-
-
     private final int tileSize = 90;
     private final int tileSpacing = 18;
     private final int tilesPerRow = 3;
     private final int tileAreaTop = 140;
     private final int tileAreaBottom = windowHeight - 20;
-
-
+    private final List<VillagerTile> visibleTiles = new ArrayList<>();
+    private TextFieldWidget searchField;
+    private List<String> filteredVillagers = new ArrayList<>();
     private int scrollOffset = 0;
     private int maxScroll = 0;
 
     public VillagerExplorerScreen() {
         super(Text.of("Villager Explorer"));
+    }
+
+    public static void renderVillagerInBox(
+            DrawContext drawer,
+            int x1, int y1, int x2, int y2,
+            float scale,
+            Vector3f translation,
+            float yaw, float pitch,
+            @Nullable Quaternionf overrideCameraAngle,
+            LivingEntity entity
+    ) {
+        EntityRenderManager entityRenderManager = MinecraftClient.getInstance().getEntityRenderDispatcher();
+        EntityRenderer<? super LivingEntity, ?> entityRenderer = entityRenderManager.getRenderer(entity);
+        EntityRenderState entityRenderState = entityRenderer.getAndUpdateRenderState(entity, 1.0F);
+
+        if (entityRenderState instanceof LivingEntityRenderState state) {
+            state.bodyYaw = yaw;
+            state.pitch = pitch;
+            state.relativeHeadYaw = yaw;
+        }
+
+
+        entityRenderState.light = 15728880;
+        entityRenderState.hitbox = null;
+        entityRenderState.shadowPieces.clear();
+        entityRenderState.outlineColor = 0;
+
+
+        Quaternionf rotation = new Quaternionf()
+                .rotateZ((float) Math.PI)
+                .rotateY((float) Math.toRadians(180.0f - yaw))
+                .rotateX((float) Math.toRadians(pitch));
+
+
+        drawer.addEntity(entityRenderState, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
     }
 
     @Override
@@ -53,27 +101,22 @@ public class VillagerExplorerScreen extends Screen {
         int windowX = centerX - windowWidth / 2;
         int windowY = this.height / 2 - windowHeight / 2;
 
-
-        this.searchField = new TextFieldWidget(
-                this.textRenderer,
-                windowX + 20,
-                windowY + 85,
-                windowWidth - 40,
-                20,
-                Text.of("Search Villager")
-        );
+        this.searchField =
+                new TextFieldWidget(
+                        this.textRenderer, windowX + 20, windowY + 85, windowWidth - 40, 20,
+                        Text.of("Search Villager"));
         this.searchField.setChangedListener(this::updateFilter);
         this.addDrawableChild(this.searchField);
         this.setInitialFocus(this.searchField);
-
 
         this.updateFilter("");
     }
 
     private void updateFilter(String filter) {
-        this.filteredVillagers = this.allVillagers.stream()
-                .filter(name -> name.toLowerCase().contains(filter.toLowerCase()))
-                .collect(Collectors.toList());
+        this.filteredVillagers =
+                this.allVillagers.stream()
+                        .filter(name -> name.toLowerCase().contains(filter.toLowerCase()))
+                        .collect(Collectors.toList());
         updateScroll();
     }
 
@@ -86,60 +129,66 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+    public boolean mouseScrolled(
+            double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
+        double amount = verticalAmount != 0.0 ? verticalAmount : horizontalAmount;
         if (maxScroll > 0 && amount != 0.0D) {
             scrollOffset -= (int) Math.signum(amount);
             if (scrollOffset < 0) scrollOffset = 0;
             else if (scrollOffset > maxScroll) scrollOffset = maxScroll;
             return true;
         }
-        return super.mouseScrolled(mouseX, mouseY, amount);
+        return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (this.searchField.keyPressed(keyCode, scanCode, modifiers)) {
+    public boolean keyPressed(KeyInput input) {
+        if (this.searchField.keyPressed(input)) {
             return true;
         }
 
-        if (keyCode == 264) {
+
+        if (input.key() == 264) {
             if (scrollOffset < maxScroll) {
                 scrollOffset++;
                 return true;
             }
         }
-        if (keyCode == 265) {
+
+        if (input.key() == 265) {
             if (scrollOffset > 0) {
                 scrollOffset--;
                 return true;
             }
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(input);
     }
 
     @Override
-    public boolean charTyped(char chr, int modifiers) {
-        if (this.searchField.charTyped(chr, modifiers)) {
+    public boolean charTyped(CharInput input) {
+        if (this.searchField.charTyped(input)) {
             return true;
         }
-        return super.charTyped(chr, modifiers);
+        return super.charTyped(input);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (this.searchField.mouseClicked(mouseX, mouseY, button)) {
+    public boolean mouseClicked(Click click, boolean doubled) {
+        if (super.mouseClicked(click, doubled)) {
             return true;
         }
+
+        double mouseX = click.x();
+        double mouseY = click.y();
         for (VillagerTile tile : visibleTiles) {
             if (tile.contains(mouseX, mouseY)) {
-                this.close();
                 MinecraftClient.getInstance().setScreen(new VillagerInfoScreen(tile.name));
                 return true;
             }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
-    }
 
+        return false;
+    }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -153,34 +202,17 @@ public class VillagerExplorerScreen extends Screen {
 
 
         context.fill(windowX, windowY, windowX + windowWidth, windowY + windowHeight, 0xCC222222);
+        context.drawStrokedRectangle(windowX, windowY, windowWidth, windowHeight, 0xFF000000);
 
 
-        context.drawBorder(windowX, windowY, windowWidth, windowHeight, 0xFF000000);
-
-
-        int textX = windowX + windowWidth / 2 - this.textRenderer.getWidth(this.title) / 2;
-        context.drawText(
-                this.textRenderer,
-                this.title,
-                textX,
-                windowY + 48,
-                0xFFFFFF,
-                false
-        );
-
-
-        context.drawText(
-                this.textRenderer,
-                Text.of("Search:"),
-                windowX + 20,
-                windowY + 75,
-                0xAAAAAA,
-                false
-        );
+        String titleText = "Villager Explorer";
+        int titleWidth = this.textRenderer.getWidth(titleText);
+        int titleX = windowX + (windowWidth - titleWidth) / 2;
+        int titleY = windowY + 55;
+        context.drawText(this.textRenderer, Text.of(titleText), titleX, titleY, 0xFFFFFFFF, false);
 
 
         int startY = windowY + tileAreaTop;
-        int availableWidth = windowWidth - 2 * 20;
         int totalTiles = filteredVillagers.size();
         int rows = (int) Math.ceil(totalTiles / (float) tilesPerRow);
 
@@ -203,96 +235,72 @@ public class VillagerExplorerScreen extends Screen {
 
 
                 context.fill(x, y, x + tileSize, y + tileSize, 0x10FFFFFF);
-                context.drawBorder(x, y, tileSize, tileSize, 0xFFFFFFFF);
+                context.drawStrokedRectangle(x, y, tileSize, tileSize, 0xFFFFFFFF);
 
                 String villagerName = filteredVillagers.get(idx);
 
 
-                renderVillagerInBox(x + tileSize / 2, y + 65, 28, villagerName);
+                MinecraftClient client = MinecraftClient.getInstance();
+                if (client.world == null) continue;
 
-                int textWidth = this.textRenderer.getWidth(villagerName);
-                textX = x + (tileSize - textWidth) / 2;
+                VillagerEntity villager =
+                        EntityType.VILLAGER.create(client.world, SpawnReason.TRIGGERED);
+                if (villager == null) continue;
 
-                context.drawText(
-                        this.textRenderer,
-                        Text.of(villagerName),
-                        textX,
-                        y + tileSize - 18,
-                        0xFFFFFFFF,
-                        false
+
+                VillagerProfession prof = VillagerUtils.getProfessionByName(villagerName);
+                RegistryEntry<VillagerProfession> entry =
+                        Registries.VILLAGER_PROFESSION.getEntry(prof);
+                villager.setVillagerData(villager.getVillagerData().withProfession(entry));
+
+
+                int boxHalf = 28;
+                int x1 = x + tileSize / 2 - boxHalf;
+                int y1 = y + 10;
+                int x2 = x + tileSize / 2 + boxHalf;
+                int y2 = y + 10 + boxHalf * 2;
+
+
+                float yaw = 0f;
+                float pitch = -3f;
+
+
+                renderVillagerInBox(
+                        context,
+                        x1, y1, x2, y2,
+                        30.0f,
+                        new Vector3f(0, 1, 0),
+                        yaw, pitch,
+                        null,
+                        villager
                 );
-                visibleTiles.add(new VillagerTile(x, y, tileSize, tileSize, idx, villagerName));
 
+
+                int nWidth = this.textRenderer.getWidth(villagerName);
+                int NameTextX = x + (tileSize - nWidth) / 2;
+                context.drawText(
+                        this.textRenderer, Text.of(villagerName),
+                        NameTextX, y + tileSize - 18, 0xFFFFFFFF, false);
+
+                visibleTiles.add(new VillagerTile(x, y, tileSize, tileSize, idx, villagerName));
             }
         }
 
 
         if (maxScroll > 0) {
-            int barHeight = Math.max(20, (int) ((float) visibleRows / rows * (tileAreaBottom - tileAreaTop)));
-            int barY = startY + (int) ((float) scrollOffset / maxScroll * ((tileAreaBottom - tileAreaTop) - barHeight));
+            int barArea = tileAreaBottom - tileAreaTop;
+            int barHeight = Math.max(20, (int) ((float) visibleRows / rows * barArea));
+            int barY =
+                    windowY
+                            + tileAreaTop
+                            + (int) ((float) scrollOffset / maxScroll * (barArea - barHeight));
             int barX = windowX + windowWidth - 8;
-            context.fill(barX, startY, barX + 6, tileAreaBottom, 0x22000000);
+            context.fill(barX, windowY + tileAreaTop, barX + 6, windowY + tileAreaBottom, 0x22000000);
             context.fill(barX, barY, barX + 6, barY + barHeight, 0xFF888888);
         }
-    }
-
-    private void renderVillagerInBox(int x, int y, int scale, String villagerName) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        VillagerEntity villager = EntityType.VILLAGER.create(client.world);
-        if (villager == null) return;
-
-        villager.setVillagerData(
-                villager.getVillagerData().withProfession(VillagerUtils.getProfessionByName(villagerName))
-        );
 
 
-        float yaw = 180f;
-        float pitch = -4f;
-
-        renderEntityInGui(x, y, scale, yaw, pitch, villager);
-    }
-
-    public static void renderEntityInGui(
-            int x, int y, int scale, float yaw, float pitch, VillagerEntity entity
-    ) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        EntityRenderDispatcher dispatcher = client.getEntityRenderDispatcher();
-        MatrixStack matrices = new MatrixStack();
-
-
-        matrices.translate(x, y, 1050.0);
-        matrices.scale(1.0F, 1.0F, -1.0F);
-
-        matrices.push();
-        matrices.scale((float) scale, (float) scale, (float) scale);
-
-
-        Quaternionf rotationZ = new Quaternionf().rotateZ((float) Math.PI);
-        matrices.multiply(rotationZ);
-        matrices.multiply(new Quaternionf().rotateX((float) Math.toRadians(pitch)));
-        matrices.multiply(new Quaternionf().rotateY((float) Math.toRadians(yaw)));
-
-        dispatcher.setRenderShadows(false);
-
-        VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
-
-        @SuppressWarnings("unchecked")
-        EntityRenderer<? super VillagerEntity> renderer =
-                (EntityRenderer<? super VillagerEntity>) dispatcher.getRenderer(entity);
-
-        dispatcher.render(
-                entity,
-                0., 0., 0.,
-                0.0f,
-                client.getTickDelta(),
-                matrices,
-                vertexConsumers,
-                15728880
-        );
-
-        vertexConsumers.draw();
-        dispatcher.setRenderShadows(true);
-        matrices.pop();
+        this.searchField.render(context, mouseX, mouseY, delta);
     }
 
     private static class VillagerTile {
@@ -312,7 +320,4 @@ public class VillagerExplorerScreen extends Screen {
             return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
         }
     }
-
-    private final List<VillagerTile> visibleTiles = new ArrayList<>();
-
 }
