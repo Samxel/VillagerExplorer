@@ -1,13 +1,13 @@
 package com.samxel.villagerexplorer;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
-import net.minecraft.village.VillagerProfession;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 
 public class VillagerUtils {
 
     public static VillagerProfession getProfessionByName(String name) {
-        Identifier id = Identifier.of("minecraft", name.toLowerCase());
-        return Registries.VILLAGER_PROFESSION.get(id);
+        Identifier id = Identifier.fromNamespaceAndPath("minecraft", name.toLowerCase());
+        return BuiltInRegistries.VILLAGER_PROFESSION.getValue(id);
     }
 }

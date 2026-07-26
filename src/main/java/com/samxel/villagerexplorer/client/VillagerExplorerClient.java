@@ -1,29 +1,29 @@
 package com.samxel.villagerexplorer.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.samxel.villagerexplorer.VillagerExplorerScreen;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class VillagerExplorerClient implements ClientModInitializer {
 
-    public static KeyBinding openGuiKeybind;
+    public static KeyMapping openGuiKeybind;
 
     @Override
     public void onInitializeClient() {
-        openGuiKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        openGuiKeybind = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.villagerexplorer.opengui",
-                InputUtil.Type.KEYSYM,
+                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
-                KeyBinding.Category.create(Identifier.of("villagerexplorer", "villagerexplorer"))
+                KeyMapping.Category.register(Identifier.fromNamespaceAndPath("villagerexplorer", "villagerexplorer"))
         ));
 
         net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (openGuiKeybind.wasPressed()) {
-                client.setScreen(new VillagerExplorerScreen());
+            while (openGuiKeybind.consumeClick()) {
+                client.gui.setScreen(new VillagerExplorerScreen());
             }
         });
     }
