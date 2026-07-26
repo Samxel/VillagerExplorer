@@ -1,24 +1,6 @@
 package com.samxel.villagerexplorer;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Click;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.input.CharInput;
-import net.minecraft.client.input.KeyInput;
-import net.minecraft.client.render.entity.EntityRenderManager;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.text.Text;
-import net.minecraft.village.VillagerProfession;
+import net.minecraft.world.entity.EntityTypes;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -26,42 +8,60 @@ import org.joml.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.CharacterEvent;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 
 public class VillagerExplorerScreen extends Screen {
     private final List<String> allVillagers =
             List.of(
-                    "Farmer",
-                    "Librarian",
-                    "Cleric",
                     "Armorer",
                     "Butcher",
                     "Cartographer",
+                    "Cleric",
+                    "Farmer",
                     "Fisherman",
                     "Fletcher",
                     "Leatherworker",
+                    "Librarian",
                     "Mason",
                     "Shepherd",
                     "Toolsmith",
                     "Weaponsmith");
     private final int windowWidth = 420;
-    private final int windowHeight = 340;
-    private final int tileSize = 90;
-    private final int tileSpacing = 18;
-    private final int tilesPerRow = 3;
-    private final int tileAreaTop = 140;
+    private final int windowHeight = 320;
+    private final int tileSize = 65;
+    private final int tileSpacing = 5;
+    private final int tilesPerRow = 5;
+    private final int tileAreaTop = 80;
     private final int tileAreaBottom = windowHeight - 20;
     private final List<VillagerTile> visibleTiles = new ArrayList<>();
-    private TextFieldWidget searchField;
+    private EditBox searchField;
     private List<String> filteredVillagers = new ArrayList<>();
     private int scrollOffset = 0;
     private int maxScroll = 0;
 
     public VillagerExplorerScreen() {
-        super(Text.of("Villager Explorer"));
+        super(Component.nullToEmpty("Villager kutss Explorer"));
     }
 
     public static void renderVillagerInBox(
-            DrawContext drawer,
+            GuiGraphicsExtractor drawer,
             int x1, int y1, int x2, int y2,
             float scale,
             Vector3f translation,
@@ -69,19 +69,18 @@ public class VillagerExplorerScreen extends Screen {
             @Nullable Quaternionf overrideCameraAngle,
             LivingEntity entity
     ) {
-        EntityRenderManager entityRenderManager = MinecraftClient.getInstance().getEntityRenderDispatcher();
+        EntityRenderDispatcher entityRenderManager = Minecraft.getInstance().getEntityRenderDispatcher();
         EntityRenderer<? super LivingEntity, ?> entityRenderer = entityRenderManager.getRenderer(entity);
-        EntityRenderState entityRenderState = entityRenderer.getAndUpdateRenderState(entity, 1.0F);
+        EntityRenderState entityRenderState = entityRenderer.createRenderState(entity, 1.0F);
 
         if (entityRenderState instanceof LivingEntityRenderState state) {
-            state.bodyYaw = yaw;
-            state.pitch = pitch;
-            state.relativeHeadYaw = yaw;
+            state.bodyRot = yaw;
+            state.xRot = pitch;
+            state.yRot = yaw;
         }
 
 
-        entityRenderState.light = 15728880;
-        entityRenderState.hitbox = null;
+        entityRenderState.lightCoords = 15728880;
         entityRenderState.shadowPieces.clear();
         entityRenderState.outlineColor = 0;
 
@@ -92,7 +91,7 @@ public class VillagerExplorerScreen extends Screen {
                 .rotateX((float) Math.toRadians(pitch));
 
 
-        drawer.addEntity(entityRenderState, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
+        drawer.entity(entityRenderState, scale, translation, rotation, overrideCameraAngle, x1, y1, x2, y2);
     }
 
     @Override
@@ -102,11 +101,11 @@ public class VillagerExplorerScreen extends Screen {
         int windowY = this.height / 2 - windowHeight / 2;
 
         this.searchField =
-                new TextFieldWidget(
-                        this.textRenderer, windowX + 20, windowY + 85, windowWidth - 40, 20,
-                        Text.of("Search Villager"));
-        this.searchField.setChangedListener(this::updateFilter);
-        this.addDrawableChild(this.searchField);
+                new EditBox(
+                        this.font, windowX + 30, windowY + 45, windowWidth - 60, 20,
+                        Component.nullToEmpty("Search Villager"));
+        this.searchField.setResponder(this::updateFilter);
+        this.addRenderableWidget(this.searchField);
         this.setInitialFocus(this.searchField);
 
         this.updateFilter("");
@@ -142,7 +141,7 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     @Override
-    public boolean keyPressed(KeyInput input) {
+    public boolean keyPressed(KeyEvent input) {
         if (this.searchField.keyPressed(input)) {
             return true;
         }
@@ -165,7 +164,7 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     @Override
-    public boolean charTyped(CharInput input) {
+    public boolean charTyped(CharacterEvent input) {
         if (this.searchField.charTyped(input)) {
             return true;
         }
@@ -173,7 +172,7 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(Click click, boolean doubled) {
+    public boolean mouseClicked(MouseButtonEvent click, boolean doubled) {
         if (super.mouseClicked(click, doubled)) {
             return true;
         }
@@ -182,7 +181,7 @@ public class VillagerExplorerScreen extends Screen {
         double mouseY = click.y();
         for (VillagerTile tile : visibleTiles) {
             if (tile.contains(mouseX, mouseY)) {
-                MinecraftClient.getInstance().setScreen(new VillagerInfoScreen(tile.name));
+                Minecraft.getInstance().gui.setScreen(new VillagerInfoScreen(tile.name));
                 return true;
             }
         }
@@ -191,8 +190,8 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
+    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+        super.extractRenderState(context, mouseX, mouseY, delta);
 
         int centerX = this.width / 2;
         int centerY = this.height / 2;
@@ -202,14 +201,14 @@ public class VillagerExplorerScreen extends Screen {
 
 
         context.fill(windowX, windowY, windowX + windowWidth, windowY + windowHeight, 0xCC222222);
-        context.drawStrokedRectangle(windowX, windowY, windowWidth, windowHeight, 0xFF000000);
+        context.outline(windowX, windowY, windowWidth, windowHeight, 0xFF000000);;
 
 
         String titleText = "Villager Explorer";
-        int titleWidth = this.textRenderer.getWidth(titleText);
+        int titleWidth = this.font.width(titleText);
         int titleX = windowX + (windowWidth - titleWidth) / 2;
-        int titleY = windowY + 55;
-        context.drawText(this.textRenderer, Text.of(titleText), titleX, titleY, 0xFFFFFFFF, false);
+        int titleY = windowY + 25;
+        context.text(this.font, Component.nullToEmpty(titleText), titleX, titleY, 0xFFFFFFFF, false);
 
 
         int startY = windowY + tileAreaTop;
@@ -235,28 +234,31 @@ public class VillagerExplorerScreen extends Screen {
 
 
                 context.fill(x, y, x + tileSize, y + tileSize, 0x10FFFFFF);
-                context.drawStrokedRectangle(x, y, tileSize, tileSize, 0xFFFFFFFF);
+                context.outline(x, y, tileSize, tileSize, 0xFFFFFFFF);
 
                 String villagerName = filteredVillagers.get(idx);
 
 
-                MinecraftClient client = MinecraftClient.getInstance();
-                if (client.world == null) continue;
+                Minecraft client = Minecraft.getInstance();
+                if (client.level == null) continue;
 
-                VillagerEntity villager =
-                        EntityType.VILLAGER.create(client.world, SpawnReason.TRIGGERED);
-                if (villager == null) continue;
+                Villager villager =
+                        EntityTypes.VILLAGER.create(client.level, EntitySpawnReason.TRIGGERED);
+
+                if (villager != null) {
+                    villager.setId(client.level.getEntityCount());
+                }
 
 
                 VillagerProfession prof = VillagerUtils.getProfessionByName(villagerName);
-                RegistryEntry<VillagerProfession> entry =
-                        Registries.VILLAGER_PROFESSION.getEntry(prof);
+                Holder<VillagerProfession> entry =
+                        BuiltInRegistries.VILLAGER_PROFESSION.wrapAsHolder(prof);
                 villager.setVillagerData(villager.getVillagerData().withProfession(entry));
 
 
                 int boxHalf = 28;
                 int x1 = x + tileSize / 2 - boxHalf;
-                int y1 = y + 10;
+                int y1 = y - 10;
                 int x2 = x + tileSize / 2 + boxHalf;
                 int y2 = y + 10 + boxHalf * 2;
 
@@ -268,20 +270,32 @@ public class VillagerExplorerScreen extends Screen {
                 renderVillagerInBox(
                         context,
                         x1, y1, x2, y2,
-                        30.0f,
-                        new Vector3f(0, 1, 0),
+                        28.0f,
+                        new Vector3f(0, 1.2f, 0),
                         yaw, pitch,
                         null,
                         villager
                 );
 
 
-                int nWidth = this.textRenderer.getWidth(villagerName);
-                int NameTextX = x + (tileSize - nWidth) / 2;
-                context.drawText(
-                        this.textRenderer, Text.of(villagerName),
-                        NameTextX, y + tileSize - 18, 0xFFFFFFFF, false);
+                float textScale = 0.8f;
 
+                int nWidth = (int)(this.font.width(villagerName) * textScale);
+                int NameTextX = x + (tileSize - nWidth) / 2;
+
+                context.pose().pushMatrix();
+                context.pose().scale(textScale, textScale);
+
+                context.text(
+                        this.font,
+                        Component.nullToEmpty(villagerName),
+                        (int)(NameTextX / textScale),
+                        (int)((y + tileSize - 18) / textScale),
+                        0xFFFFFFFF,
+                        false
+                );
+
+                context.pose().popMatrix();
                 visibleTiles.add(new VillagerTile(x, y, tileSize, tileSize, idx, villagerName));
             }
         }
@@ -300,7 +314,7 @@ public class VillagerExplorerScreen extends Screen {
         }
 
 
-        this.searchField.render(context, mouseX, mouseY, delta);
+        this.searchField.extractRenderState(context, mouseX, mouseY, delta);
     }
 
     private static class VillagerTile {
