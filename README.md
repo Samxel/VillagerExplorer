@@ -2,7 +2,14 @@
 
 A client-side mod for Minecraft 26.3 that shows you everything villagers and the wandering trader have to offer. Available for Fabric and NeoForge.
 
-Download it on [Modrinth](https://modrinth.com/mod/villagerexplorer) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/villagerexplorer).
+<p align="center">
+  <a href="https://modrinth.com/mod/villagerexplorer">
+    <img src="https://img.shields.io/badge/Modrinth-Download-brightgreen?logo=modrinth&style=for-the-badge" alt="Modrinth">
+  </a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/villagerexplorer">
+    <img src="https://img.shields.io/badge/CurseForge-Download-orange?logo=curseforge&style=for-the-badge" alt="CurseForge">
+  </a>
+</p>
 
 ## What it does
 
