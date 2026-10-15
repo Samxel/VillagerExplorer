@@ -275,6 +275,7 @@ public class VillagerInfoScreen extends Screen {
         }
         if (wanted && trade.price() != null && current.getItem() == trade.wants().getFirst().current().getItem()) {
             lines.add(Component.literal("Price: " + trade.price().min() + "-" + trade.price().max() + " emeralds").withStyle(ChatFormatting.GREEN));
+            lines.add(Component.literal("Depends on the rolled enchantment").withStyle(ChatFormatting.DARK_GREEN));
         }
         if (!wanted && trade.modifier() != null) {
             lines.add(Component.literal(trade.modifier().description()).withStyle(ChatFormatting.LIGHT_PURPLE));

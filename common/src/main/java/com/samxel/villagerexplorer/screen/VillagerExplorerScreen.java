@@ -80,7 +80,6 @@ public class VillagerExplorerScreen extends Screen {
         this.searchField.setValue(this.query);
         this.searchField.setResponder(this::updateFilter);
         this.addRenderableWidget(this.searchField);
-        this.setInitialFocus(this.searchField);
 
         for (Merchant merchant : Merchant.values()) {
             LivingEntity preview = VillagerPreview.create(merchant);
@@ -169,6 +168,10 @@ public class VillagerExplorerScreen extends Screen {
 
     @Override
     public boolean charTyped(CharacterEvent event) {
+        // the field starts unfocused so its hint stays visible, typing focuses it
+        if (!this.searchField.isFocused()) {
+            this.setFocused(this.searchField);
+        }
         return this.searchField.charTyped(event) || super.charTyped(event);
     }
 
@@ -249,17 +252,6 @@ public class VillagerExplorerScreen extends Screen {
         this.scrollBar.extract(this.style, graphics);
 
         super.extractRenderState(graphics, mouseX, mouseY, a);
-        this.extractFocusedHint(graphics);
-    }
-
-    // EditBox only draws its hint while unfocused, but the search field is focused right away
-    private void extractFocusedHint(GuiGraphicsExtractor graphics) {
-        if (!this.searchField.isFocused() || !this.searchField.getValue().isEmpty()) {
-            return;
-        }
-        int x = this.searchField.getX() + (this.style.borderedSearch() ? 4 : 0) + this.font.width("_") + 1;
-        int y = this.searchField.getY() + (this.style.borderedSearch() ? (SEARCH_HEIGHT - 8) / 2 : 0);
-        graphics.text(this.font, SEARCH_HINT, x, y, 0xFF808080, false);
     }
 
     private void extractTile(GuiGraphicsExtractor graphics, Tile tile, boolean hovered, int mouseX, int mouseY) {

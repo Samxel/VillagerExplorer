@@ -70,6 +70,7 @@ def convert(trade):
             base = wants[0]["count"]
             result["modifier"] = "enchanted"
             result["price"] = [min(base + levels["min"], MAX_PRICE), min(base + levels["max"], MAX_PRICE)]
+            wants[0]["count"] = result["price"][0]
         elif kind == "minecraft:enchant_randomly":
             result["modifier"] = "book"
             result["price"] = [5, MAX_PRICE]
