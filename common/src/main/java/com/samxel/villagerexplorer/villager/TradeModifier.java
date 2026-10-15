@@ -1,25 +1,24 @@
 package com.samxel.villagerexplorer.villager;
 
+import com.samxel.villagerexplorer.Tr;
 import org.jspecify.annotations.Nullable;
 
 public enum TradeModifier {
-    ENCHANTED("enchanted", "Random enchantments"),
-    BOOK("book", "Random tradeable enchantment"),
-    DYED("dyed", "Random dye color"),
-    STEW("stew", "Random effect"),
-    TIPPED("tipped", "Random potion effect"),
-    MAP("map", "Points to the nearest structure");
+    ENCHANTED("enchanted"),
+    BOOK("book"),
+    DYED("dyed"),
+    STEW("stew"),
+    TIPPED("tipped"),
+    MAP("map");
 
     private final String id;
-    private final String description;
 
-    TradeModifier(String id, String description) {
+    TradeModifier(String id) {
         this.id = id;
-        this.description = description;
     }
 
     public String description() {
-        return this.description;
+        return Tr.get("modifier." + this.id);
     }
 
     public boolean glint() {

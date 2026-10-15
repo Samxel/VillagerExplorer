@@ -47,6 +47,15 @@
 - **Wandering Trader**  
   Browse everything the wandering trader can buy and sell, including how many offers of each group he picks.
 
+- **Pinned Trades HUD**  
+  Pin any trade with the star in the trade list. Pinned trades show up in a small HUD widget that uses your GUI style. Open the chat to drag it around or unpin entries.
+
+- **Quick Open**  
+  Look at a villager or wandering trader and press the openGUI key to jump straight to its trades, profession and biome included.
+
+- **Translations**  
+  All texts use translation keys. English and German are included.
+
 - **Four GUI Styles**  
   Vanilla, Modern, Refined and Ledger. The GUI also shrinks to fit small screens and high GUI scales.
 

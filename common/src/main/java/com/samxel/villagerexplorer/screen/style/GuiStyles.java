@@ -1,5 +1,6 @@
 package com.samxel.villagerexplorer.screen.style;
 
+import com.samxel.villagerexplorer.Tr;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -19,6 +20,10 @@ public enum GuiStyles {
 
     public GuiStyle style() {
         return this.style;
+    }
+
+    public String displayName() {
+        return Tr.get("style." + this.id());
     }
 
     public String id() {

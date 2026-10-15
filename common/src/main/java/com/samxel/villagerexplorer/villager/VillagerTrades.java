@@ -69,7 +69,7 @@ public final class VillagerTrades {
             for (JsonElement trade : group.getAsJsonArray("trades")) {
                 trades.add(parseTrade(trade.getAsJsonObject()));
             }
-            result.add(new TradeGroup(TradeGroup.displayName(id), TradeGroup.color(id), group.get("amount").getAsInt(), List.copyOf(trades)));
+            result.add(new TradeGroup(id, group.get("amount").getAsInt(), List.copyOf(trades)));
         }
         return List.copyOf(result);
     }

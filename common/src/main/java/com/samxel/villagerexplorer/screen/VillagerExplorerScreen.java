@@ -1,6 +1,7 @@
 package com.samxel.villagerexplorer.screen;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.samxel.villagerexplorer.Tr;
 import com.samxel.villagerexplorer.screen.style.GuiStyle;
 import com.samxel.villagerexplorer.screen.style.GuiStyles;
 import com.samxel.villagerexplorer.screen.style.Layout;
@@ -23,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 public class VillagerExplorerScreen extends Screen {
-    private static final String TITLE = "Villager Explorer";
-    private static final Component SEARCH_HINT = Component.literal("Search for a job, villager or item...");
     private static final int TILE_SIZE = 90;
     private static final int MIN_TILE_SIZE = 72;
     private static final int TILE_SPACING = 18;
@@ -53,7 +52,7 @@ public class VillagerExplorerScreen extends Screen {
     }
 
     public VillagerExplorerScreen(@Nullable Screen parent) {
-        super(Component.literal(TITLE));
+        super(Tr.of("title"));
         this.parent = parent;
     }
 
@@ -73,15 +72,15 @@ public class VillagerExplorerScreen extends Screen {
         int searchY = this.windowY() + this.layout.searchY();
         int searchWidth = this.layout.width() - 40;
         if (this.style.borderedSearch()) {
-            this.searchField = new EditBox(this.font, searchX, searchY, searchWidth, SEARCH_HEIGHT, SEARCH_HINT);
+            this.searchField = new EditBox(this.font, searchX, searchY, searchWidth, SEARCH_HEIGHT, Tr.of("search.hint"));
         } else {
-            this.searchField = new EditBox(this.font, searchX + 6, searchY + 6, searchWidth - 12, SEARCH_HEIGHT - 8, SEARCH_HINT);
+            this.searchField = new EditBox(this.font, searchX + 6, searchY + 6, searchWidth - 12, SEARCH_HEIGHT - 8, Tr.of("search.hint"));
             this.searchField.setBordered(false);
             this.searchField.setTextColor(this.style.searchTextColor());
         }
         this.searchField.setTextShadow(this.style.searchTextShadow());
         if (this.style.searchTextShadow()) {
-            this.searchField.setHint(SEARCH_HINT);
+            this.searchField.setHint(Tr.of("search.hint"));
         }
         this.searchField.setValue(this.query);
         this.searchField.setResponder(this::updateFilter);
@@ -226,7 +225,7 @@ public class VillagerExplorerScreen extends Screen {
         this.visibleTiles.clear();
 
         this.style.panel(graphics, windowX, windowY, this.layout.width(), this.layout.height());
-        this.style.title(graphics, this.font, TITLE, windowX + this.layout.width() / 2, windowY + this.layout.titleY());
+        this.style.title(graphics, this.font, this.title.getString(), windowX + this.layout.width() / 2, windowY + this.layout.titleY());
 
         if (!this.style.borderedSearch()) {
             this.style.searchBackground(graphics, windowX + 20, windowY + this.layout.searchY(),
@@ -235,7 +234,7 @@ public class VillagerExplorerScreen extends Screen {
 
         int startY = windowY + this.layout.tileTop();
         if (this.filtered.isEmpty()) {
-            String text = "Nobody trades \"" + this.query + "\"";
+            String text = Tr.get("search.empty", this.query);
             this.style.bodyText(graphics, this.font, text, windowX + (this.layout.width() - this.font.width(text)) / 2, startY + 20);
         }
 
@@ -284,7 +283,7 @@ public class VillagerExplorerScreen extends Screen {
         }
         int x = this.searchField.getX() + (this.style.borderedSearch() ? 4 : 0);
         int y = this.searchField.getY() + (this.style.borderedSearch() ? (SEARCH_HEIGHT - 8) / 2 : 0);
-        graphics.text(this.font, SEARCH_HINT, x, y, this.style.searchHintColor(), false);
+        graphics.text(this.font, Tr.of("search.hint"), x, y, this.style.searchHintColor(), false);
     }
 
     private void extractTile(GuiGraphicsExtractor graphics, Tile tile, boolean hovered, float hover, int mouseX, int mouseY) {

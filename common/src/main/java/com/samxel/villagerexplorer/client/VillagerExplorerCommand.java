@@ -4,8 +4,9 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import com.samxel.villagerexplorer.Tr;
 import com.samxel.villagerexplorer.VillagerExplorer;
-import com.samxel.villagerexplorer.config.StyleConfig;
+import com.samxel.villagerexplorer.config.ExplorerConfig;
 import com.samxel.villagerexplorer.screen.StyleScreen;
 import com.samxel.villagerexplorer.screen.VillagerExplorerScreen;
 import com.samxel.villagerexplorer.screen.style.GuiStyles;
@@ -38,11 +39,11 @@ public final class VillagerExplorerCommand {
         String name = StringArgumentType.getString(context, "name");
         return GuiStyles.byId(name).map(style -> {
             GuiStyles.setCurrent(style);
-            StyleConfig.save();
-            message(Component.literal("Villager Explorer style set to ").append(Component.literal(style.id()).withStyle(ChatFormatting.GREEN)));
+            ExplorerConfig.save();
+            message(Tr.of("command.style_set", Component.literal(style.id()).withStyle(ChatFormatting.GREEN)));
             return open();
         }).orElseGet(() -> {
-            message(Component.literal("Unknown style: " + name + ". Available: " + availableStyles()).withStyle(ChatFormatting.RED));
+            message(Tr.of("command.unknown_style", name, availableStyles()).withStyle(ChatFormatting.RED));
             return 0;
         });
     }

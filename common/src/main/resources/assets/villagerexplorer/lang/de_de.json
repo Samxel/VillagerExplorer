@@ -1,0 +1,61 @@
+{
+  "key.category.villagerexplorer.villagerexplorer": "Villager Explorer",
+  "key.villagerexplorer.opengui": "Explorer öffnen",
+
+  "villagerexplorer.title": "Villager Explorer",
+  "villagerexplorer.search.hint": "Nach Beruf, Dorfbewohner oder Item suchen...",
+  "villagerexplorer.search.empty": "Niemand handelt mit \"%s\"",
+
+  "villagerexplorer.section.trades": "Handel",
+  "villagerexplorer.section.job_site": "Arbeitsplatz",
+  "villagerexplorer.trades.empty_biome": "Keine Angebote in diesem Biom",
+
+  "villagerexplorer.group.level_1": "Neuling",
+  "villagerexplorer.group.level_2": "Lehrling",
+  "villagerexplorer.group.level_3": "Geselle",
+  "villagerexplorer.group.level_4": "Experte",
+  "villagerexplorer.group.level_5": "Meister",
+  "villagerexplorer.group.buying": "Ankauf",
+  "villagerexplorer.group.common": "Häufig",
+  "villagerexplorer.group.uncommon": "Selten",
+  "villagerexplorer.offers.some": "Bietet %s von diesen %s Angeboten",
+  "villagerexplorer.offers.all": "Bietet alle diese Angebote",
+
+  "villagerexplorer.biome.all": "Alle Biome",
+  "villagerexplorer.biome.desert": "Wüste",
+  "villagerexplorer.biome.jungle": "Dschungel",
+  "villagerexplorer.biome.plains": "Ebene",
+  "villagerexplorer.biome.savanna": "Savanne",
+  "villagerexplorer.biome.snow": "Schnee",
+  "villagerexplorer.biome.swamp": "Sumpf",
+  "villagerexplorer.biome.taiga": "Taiga",
+
+  "villagerexplorer.tooltip.variants": "Eine von %s Varianten",
+  "villagerexplorer.tooltip.price": "Preis: %s-%s Smaragde",
+  "villagerexplorer.tooltip.price_note": "Hängt von der Verzauberung ab",
+  "villagerexplorer.tooltip.uses": "Max. Nutzungen: %s  Dorfbewohner-EP: +%s",
+  "villagerexplorer.tooltip.biomes": "Nur bei Dorfbewohnern aus: %s",
+
+  "villagerexplorer.modifier.enchanted": "Zufällige Verzauberungen",
+  "villagerexplorer.modifier.book": "Zufällige handelbare Verzauberung",
+  "villagerexplorer.modifier.dyed": "Zufällige Farbe",
+  "villagerexplorer.modifier.stew": "Zufälliger Effekt",
+  "villagerexplorer.modifier.tipped": "Zufälliger Trankeffekt",
+  "villagerexplorer.modifier.map": "Zeigt zum nächsten Bauwerk",
+
+  "villagerexplorer.pin.add": "Im HUD anpinnen",
+  "villagerexplorer.pin.remove": "Lösen",
+  "villagerexplorer.pin.title": "Angepinnte Angebote",
+  "villagerexplorer.pin.drag": "Zum Verschieben ziehen",
+
+  "villagerexplorer.style.title": "Villager Explorer Stil",
+  "villagerexplorer.style.preview": "Vorschau",
+  "villagerexplorer.style.join_world": "Betritt eine Welt für die Vorschau",
+  "villagerexplorer.style.vanilla": "Vanilla",
+  "villagerexplorer.style.modern": "Modern",
+  "villagerexplorer.style.refined": "Refined",
+  "villagerexplorer.style.ledger": "Ledger",
+
+  "villagerexplorer.command.style_set": "Villager Explorer Stil gesetzt auf %s",
+  "villagerexplorer.command.unknown_style": "Unbekannter Stil: %s. Verfügbar: %s"
+}

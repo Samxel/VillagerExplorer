@@ -1,25 +1,17 @@
 package com.samxel.villagerexplorer.villager;
 
+import com.samxel.villagerexplorer.Tr;
+
 import java.util.List;
 
-public record TradeGroup(String displayName, int color, int amount, List<Trade> trades) {
+public record TradeGroup(String id, int amount, List<Trade> trades) {
 
-    public static String displayName(String id) {
-        return switch (id) {
-            case "level_1" -> "Novice";
-            case "level_2" -> "Apprentice";
-            case "level_3" -> "Journeyman";
-            case "level_4" -> "Expert";
-            case "level_5" -> "Master";
-            case "buying" -> "Buying";
-            case "common" -> "Common";
-            case "uncommon" -> "Uncommon";
-            default -> id;
-        };
+    public String displayName() {
+        return Tr.get("group." + this.id);
     }
 
-    public static int color(String id) {
-        return switch (id) {
+    public int color() {
+        return switch (this.id) {
             case "level_1", "buying" -> 0xFF9E9E9E;
             case "level_2" -> 0xFFE0B84A;
             case "level_3", "common" -> 0xFF6FCF5C;

@@ -1,5 +1,7 @@
 package com.samxel.villagerexplorer.screen;
 
+import com.samxel.villagerexplorer.Tr;
+import com.samxel.villagerexplorer.pin.Pins;
 import com.samxel.villagerexplorer.screen.style.GuiStyle;
 import com.samxel.villagerexplorer.screen.style.GuiStyles;
 import com.samxel.villagerexplorer.screen.style.Layout;
@@ -33,10 +35,12 @@ public class VillagerInfoScreen extends Screen {
     private static final int PREVIEW_SIZE = 45;
     private static final int BIOME_BUTTON = 12;
     private static final int BIOME_WIDTH = 100;
+    private static final int PIN_SIZE = 10;
 
     private final Merchant merchant;
     private final TradeSearch search;
-    private final Screen parent;
+    private final @Nullable Screen parent;
+    private final List<PinButton> pinButtons = new ArrayList<>();
     private final List<TradeGroup> groups;
     private final ScrollBar scrollBar = new ScrollBar();
     private final Motion motion = new Motion();
@@ -51,11 +55,16 @@ public class VillagerInfoScreen extends Screen {
     private int scrollOffset;
     private boolean scrolledToMatch;
 
-    public VillagerInfoScreen(Merchant merchant, TradeSearch search, Screen parent) {
+    public VillagerInfoScreen(Merchant merchant, TradeSearch search, @Nullable Screen parent) {
+        this(merchant, search, parent, null);
+    }
+
+    public VillagerInfoScreen(Merchant merchant, TradeSearch search, @Nullable Screen parent, @Nullable VillagerBiome biome) {
         super(Component.literal(merchant.displayName()));
         this.merchant = merchant;
         this.search = search;
         this.parent = parent;
+        this.biome = biome;
         this.groups = VillagerTrades.forMerchant(merchant);
     }
 
@@ -82,10 +91,12 @@ public class VillagerInfoScreen extends Screen {
 
     private void rebuildRows() {
         List<Row> result = new ArrayList<>();
-        for (TradeGroup group : this.groups) {
-            for (Trade trade : group.trades()) {
+        for (int groupIndex = 0; groupIndex < this.groups.size(); groupIndex++) {
+            TradeGroup group = this.groups.get(groupIndex);
+            for (int tradeIndex = 0; tradeIndex < group.trades().size(); tradeIndex++) {
+                Trade trade = group.trades().get(tradeIndex);
                 if (trade.availableIn(this.biome)) {
-                    result.add(new Row(group, trade));
+                    result.add(new Row(group, trade, new Pins.Pin(this.merchant, groupIndex, tradeIndex)));
                 }
             }
         }
@@ -139,6 +150,15 @@ public class VillagerInfoScreen extends Screen {
         if (this.scrollBar.press(event.x(), event.y())) {
             this.setScroll(this.scrollBar.drag(event.y()));
             return true;
+        }
+        if (this.visibleAt((int) event.y())) {
+            for (PinButton button : this.pinButtons) {
+                if (inside(event.x(), event.y(), button.x(), button.y(), PIN_SIZE, PIN_SIZE)) {
+                    Motion.click();
+                    Pins.toggle(button.pin());
+                    return true;
+                }
+            }
         }
         if (this.merchant.isVillager()) {
             int y = this.windowY() + this.layout.biomeY();
@@ -206,12 +226,13 @@ public class VillagerInfoScreen extends Screen {
     }
 
     private void extractTrades(GuiGraphicsExtractor graphics, int tableX, int tableY, int mouseX, int mouseY) {
-        this.style.sectionLabel(graphics, this.font, "Trades", tableX - 5, tableY - 14);
+        this.style.sectionLabel(graphics, this.font, Tr.get("section.trades"), tableX - 5, tableY - 14);
 
         int visible = this.layout.tradesVisible();
         this.scrollPixels = this.motion.approach(this.scrollPixels, this.scrollOffset * ROW_HEIGHT, 50.0F);
         int first = (int) (this.scrollPixels / ROW_HEIGHT);
         int end = Math.min(this.rows.size(), first + visible + 1);
+        this.pinButtons.clear();
         this.clipTop = tableY - 3;
         this.clipBottom = tableY + visible * ROW_HEIGHT - 3;
         graphics.enableScissor(tableX - 6, this.clipTop, tableX + TABLE_WIDTH, this.clipBottom);
@@ -245,13 +266,15 @@ public class VillagerInfoScreen extends Screen {
             int givenX = arrowX + 15;
             this.extractTradeSlot(graphics, trade, trade.gives(), false, givenX, y, mouseX, mouseY);
             this.extractBiomeIcons(graphics, trade, givenX + SLOT_SIZE + 4, y + 5, mouseX, mouseY);
+            this.extractPinButton(graphics, row, tableX + TABLE_WIDTH - PIN_SIZE - 6, y + 4, mouseX, mouseY,
+                    inside(mouseX, mouseY, rowX, y - 2, rowWidth, ROW_HEIGHT - 2));
         }
 
         this.extractGroupLabels(graphics, tableX, tableY, mouseX, mouseY);
         graphics.disableScissor();
 
         if (this.rows.isEmpty()) {
-            this.style.bodyText(graphics, this.font, "No trades for this biome", tableX, tableY + 4);
+            this.style.bodyText(graphics, this.font, Tr.get("trades.empty_biome"), tableX, tableY + 4);
         }
 
         this.scrollBar.update(tableX + 230, tableY, visible * ROW_HEIGHT, visible, this.rows.size(), this.scrollPixels / ROW_HEIGHT);
@@ -284,8 +307,8 @@ public class VillagerInfoScreen extends Screen {
     private String offerText(TradeGroup group) {
         int count = (int) group.trades().stream().filter(trade -> trade.availableIn(this.biome)).count();
         return count > group.amount()
-                ? "Offers " + group.amount() + " of these " + count + " trades"
-                : "Offers all of these trades";
+                ? Tr.get("offers.some", group.amount(), count)
+                : Tr.get("offers.all");
     }
 
     private void extractTradeSlot(GuiGraphicsExtractor graphics, Trade trade, TradeStack stack, boolean wanted, int x, int y, int mouseX, int mouseY) {
@@ -298,18 +321,18 @@ public class VillagerInfoScreen extends Screen {
 
         List<Component> lines = new ArrayList<>(getTooltipFromItem(this.minecraft, current));
         if (stack.hasVariants()) {
-            lines.add(Component.literal("One of " + stack.variants().size() + " variants").withStyle(ChatFormatting.DARK_GRAY));
+            lines.add(Tr.of("tooltip.variants", stack.variants().size()).withStyle(ChatFormatting.DARK_GRAY));
         }
         if (wanted && trade.price() != null && current.getItem() == trade.wants().getFirst().current().getItem()) {
-            lines.add(Component.literal("Price: " + trade.price().min() + "-" + trade.price().max() + " emeralds").withStyle(ChatFormatting.GREEN));
-            lines.add(Component.literal("Depends on the rolled enchantment").withStyle(ChatFormatting.DARK_GREEN));
+            lines.add(Tr.of("tooltip.price", trade.price().min(), trade.price().max()).withStyle(ChatFormatting.GREEN));
+            lines.add(Tr.of("tooltip.price_note").withStyle(ChatFormatting.DARK_GREEN));
         }
         if (!wanted && trade.modifier() != null) {
             lines.add(Component.literal(trade.modifier().description()).withStyle(ChatFormatting.LIGHT_PURPLE));
         }
-        lines.add(Component.literal("Max uses: " + trade.maxUses() + "  Villager XP: +" + trade.xp()).withStyle(ChatFormatting.GRAY));
+        lines.add(Tr.of("tooltip.uses", trade.maxUses(), trade.xp()).withStyle(ChatFormatting.GRAY));
         if (!trade.biomes().isEmpty()) {
-            lines.add(Component.literal("Only " + biomeNames(trade) + " villagers").withStyle(ChatFormatting.GOLD));
+            lines.add(Tr.of("tooltip.biomes", biomeNames(trade)).withStyle(ChatFormatting.GOLD));
         }
         graphics.setComponentTooltipForNextFrame(this.font, lines, mouseX, mouseY);
     }
@@ -326,7 +349,7 @@ public class VillagerInfoScreen extends Screen {
             graphics.pose().popMatrix();
         }
         if (this.visibleAt(mouseY) && inside(mouseX, mouseY, x, y, trade.biomes().size() * 9, 9)) {
-            graphics.setTooltipForNextFrame(this.font, Component.literal("Only " + biomeNames(trade) + " villagers"), mouseX, mouseY);
+            graphics.setTooltipForNextFrame(this.font, Tr.of("tooltip.biomes", biomeNames(trade)), mouseX, mouseY);
         }
     }
 
@@ -342,7 +365,7 @@ public class VillagerInfoScreen extends Screen {
         this.style.buttonLabel(graphics, this.font, "<", x + BIOME_BUTTON / 2 + 1, y + 2, leftHovered);
         this.style.buttonLabel(graphics, this.font, ">", x + BIOME_WIDTH - BIOME_BUTTON / 2 + 1, y + 2, rightHovered);
 
-        String label = this.biome == null ? "All biomes" : this.biome.displayName();
+        String label = this.biome == null ? Tr.get("biome.all") : this.biome.displayName();
         int labelWidth = this.font.width(label) + (this.biome == null ? 0 : 10);
         int labelX = x + (BIOME_WIDTH - labelWidth) / 2;
         if (this.biome != null) {
@@ -357,7 +380,7 @@ public class VillagerInfoScreen extends Screen {
     }
 
     private void extractJobSite(GuiGraphicsExtractor graphics, JobSiteRecipe recipe, int gridX, int gridY, int mouseX, int mouseY) {
-        this.style.sectionLabel(graphics, this.font, "Job Site", gridX, gridY - 14);
+        this.style.sectionLabel(graphics, this.font, Tr.get("section.job_site"), gridX, gridY - 14);
 
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -395,6 +418,21 @@ public class VillagerInfoScreen extends Screen {
         return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
     }
 
-    private record Row(TradeGroup group, Trade trade) {
+    private void extractPinButton(GuiGraphicsExtractor graphics, Row row, int x, int y, int mouseX, int mouseY, boolean rowHovered) {
+        boolean pinned = Pins.isPinned(row.pin());
+        boolean hovered = this.visibleAt(mouseY) && inside(mouseX, mouseY, x, y, PIN_SIZE, PIN_SIZE);
+        if (pinned || rowHovered && this.visibleAt(mouseY)) {
+            this.style.buttonLabel(graphics, this.font, pinned ? "★" : "☆", x + PIN_SIZE / 2, y + 1, hovered || pinned);
+        }
+        if (hovered) {
+            graphics.setTooltipForNextFrame(this.font, Tr.of(pinned ? "pin.remove" : "pin.add"), mouseX, mouseY);
+        }
+        this.pinButtons.add(new PinButton(x, y, row.pin()));
+    }
+
+    private record PinButton(int x, int y, Pins.Pin pin) {
+    }
+
+    private record Row(TradeGroup group, Trade trade, Pins.Pin pin) {
     }
 }

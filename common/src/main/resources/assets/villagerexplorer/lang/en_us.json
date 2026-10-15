@@ -1,4 +1,61 @@
 {
   "key.category.villagerexplorer.villagerexplorer": "Villager Explorer",
-  "key.villagerexplorer.opengui": "Open GUI"
+  "key.villagerexplorer.opengui": "Open Explorer",
+
+  "villagerexplorer.title": "Villager Explorer",
+  "villagerexplorer.search.hint": "Search for a job, villager or item...",
+  "villagerexplorer.search.empty": "Nobody trades \"%s\"",
+
+  "villagerexplorer.section.trades": "Trades",
+  "villagerexplorer.section.job_site": "Job Site",
+  "villagerexplorer.trades.empty_biome": "No trades for this biome",
+
+  "villagerexplorer.group.level_1": "Novice",
+  "villagerexplorer.group.level_2": "Apprentice",
+  "villagerexplorer.group.level_3": "Journeyman",
+  "villagerexplorer.group.level_4": "Expert",
+  "villagerexplorer.group.level_5": "Master",
+  "villagerexplorer.group.buying": "Buying",
+  "villagerexplorer.group.common": "Common",
+  "villagerexplorer.group.uncommon": "Uncommon",
+  "villagerexplorer.offers.some": "Offers %s of these %s trades",
+  "villagerexplorer.offers.all": "Offers all of these trades",
+
+  "villagerexplorer.biome.all": "All biomes",
+  "villagerexplorer.biome.desert": "Desert",
+  "villagerexplorer.biome.jungle": "Jungle",
+  "villagerexplorer.biome.plains": "Plains",
+  "villagerexplorer.biome.savanna": "Savanna",
+  "villagerexplorer.biome.snow": "Snow",
+  "villagerexplorer.biome.swamp": "Swamp",
+  "villagerexplorer.biome.taiga": "Taiga",
+
+  "villagerexplorer.tooltip.variants": "One of %s variants",
+  "villagerexplorer.tooltip.price": "Price: %s-%s emeralds",
+  "villagerexplorer.tooltip.price_note": "Depends on the rolled enchantment",
+  "villagerexplorer.tooltip.uses": "Max uses: %s  Villager XP: +%s",
+  "villagerexplorer.tooltip.biomes": "Only %s villagers",
+
+  "villagerexplorer.modifier.enchanted": "Random enchantments",
+  "villagerexplorer.modifier.book": "Random tradeable enchantment",
+  "villagerexplorer.modifier.dyed": "Random dye color",
+  "villagerexplorer.modifier.stew": "Random effect",
+  "villagerexplorer.modifier.tipped": "Random potion effect",
+  "villagerexplorer.modifier.map": "Points to the nearest structure",
+
+  "villagerexplorer.pin.add": "Pin to HUD",
+  "villagerexplorer.pin.remove": "Unpin",
+  "villagerexplorer.pin.title": "Pinned trades",
+  "villagerexplorer.pin.drag": "Drag to move",
+
+  "villagerexplorer.style.title": "Villager Explorer Style",
+  "villagerexplorer.style.preview": "Preview",
+  "villagerexplorer.style.join_world": "Join a world to preview the explorer",
+  "villagerexplorer.style.vanilla": "Vanilla",
+  "villagerexplorer.style.modern": "Modern",
+  "villagerexplorer.style.refined": "Refined",
+  "villagerexplorer.style.ledger": "Ledger",
+
+  "villagerexplorer.command.style_set": "Villager Explorer style set to %s",
+  "villagerexplorer.command.unknown_style": "Unknown style: %s. Available: %s"
 }
