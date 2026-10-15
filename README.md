@@ -1,95 +1,63 @@
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/c3c52df9-fb44-42e5-8653-2c1a0a9b5cd8" alt="villagerexplorer_header" width="256""/>
-</p>
+# Villager Explorer
 
-<h1 align="center">Villager Explorer<br>26.3 (Fabric &amp; NeoForge)</h1>
+A client-side mod for Minecraft 26.3 that shows you everything villagers and the wandering trader have to offer. Available for Fabric and NeoForge.
 
-<p align="center">
-  <b>Available at:</b><br>
-  <a href="https://www.curseforge.com/minecraft/mc-mods/villagerexplorer">
-    <img src="https://img.shields.io/badge/CurseForge-Download-orange?logo=curseforge&style=for-the-badge" alt="CurseForge">
-  </a>
-  <a href="https://modrinth.com/mod/villagerexplorer">
-    <img src="https://img.shields.io/badge/Modrinth-Download-brightgreen?logo=modrinth&style=for-the-badge" alt="Modrinth">
-  </a>
-</p>
+Download it on [Modrinth](https://modrinth.com/mod/villagerexplorer) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/villagerexplorer).
 
----
+## What it does
 
-<p align="center">
-  <strong>Villager Explorer</strong> is a client-side Minecraft mod that lets you view detailed information about villagers in a beautiful, interactive GUI. Instantly see a villager’s profession, job site block, and all available trades.<br><br>
-  Whether you’re a trading expert or just want to keep track of your villagers, Villager Explorer makes managing and understanding villagers easier than ever.<br>
-</p>
+Press `V` and you get an overview of every profession. Pick one and you see all of its trades sorted by level, together with the job site block and its crafting recipe. No more guessing which villager sells what or digging through the wiki in the middle of building a trading hall.
 
+The trade data comes straight from the vanilla game files, so prices, max uses and villager XP match what you see in survival.
 
----
+## Features
 
-## Features 🛠️
+### Trade overview
+Every trade a profession can offer, grouped by level. Hovering an item shows its normal tooltip plus max uses, villager XP, the price range for enchanted items and things like random enchantments or dye colors.
 
-- **Villager Info Screen**  
-  Open a custom screen to see a villager’s name, profession, and more in a large, stylish window.
-  
-- **Job Site Block Display**  
-  Instantly see which job site block is associated with the villager’s profession.
+### Search
+Type a profession, an item, a job site block or even an enchantment like `mending` into the search bar. Villager Explorer shows who trades it and highlights the matching rows.
 
-- **Trade List**  
-  View all available trades for the villager, including trade items, costs, and rewards.
+### Biomes
+Villagers from different biomes offer slightly different trades, for example boats, banners and explorer maps. You can switch the biome in the detail view to change the villager skin and only see what that villager can actually sell.
 
-- **Item Tooltips**  
-  Hover over items in the crafting grid, job site, or trade list to see their vanilla tooltips plus max uses, villager XP, price ranges and random effects.
+### Wandering trader
+The wandering trader has his own page with everything he buys and sells, plus how many offers of each group he picks when he spawns.
 
-- **Search by Job, Villager or Item**  
-  Find out who sells or buys an item, a job site block or even an enchantment (e.g. `mending`). Matching trades are highlighted.
+### Pinned trades
+Click the star next to a trade to pin it. Pinned trades stay visible in a small widget on your screen, which is handy when you are hunting for a specific book. Open the chat to move the widget around or remove entries.
 
-- **Villager Biomes**  
-  Switch the villager skin per biome and see which trades only certain biomes offer (boats, banners, explorer maps).
+### Quick open
+Look at a villager or wandering trader and press `V` to jump straight to its trades, with the right profession and biome already selected.
 
-- **Wandering Trader**  
-  Browse everything the wandering trader can buy and sell, including how many offers of each group he picks.
+### GUI styles
+Choose between Vanilla, Modern, Refined and Ledger. The pinned trades widget follows the style you pick, and the GUI scales down on small screens and high GUI scales.
 
-- **Pinned Trades HUD**  
-  Pin any trade with the star in the trade list. Pinned trades show up in a small HUD widget that uses your GUI style. Open the chat to drag it around or unpin entries.
+### Translations
+English and German are included, and new languages only need a translation file.
 
-- **Quick Open**  
-  Look at a villager or wandering trader and press the openGUI key to jump straight to its trades, profession and biome included.
+## Settings
 
-- **Translations**  
-  All texts use translation keys. English and German are included.
+You can change the key in Minecraft's controls menu. The GUI style can be picked through Mod Menu on Fabric, the mod list on NeoForge or the command `/villagerexplorer style`. If you already know which one you want, `/villagerexplorer style <vanilla|modern|refined|ledger>` sets it directly.
 
-- **Four GUI Styles**  
-  Vanilla, Modern, Refined and Ledger. The GUI also shrinks to fit small screens and high GUI scales.
+All settings, including your pinned trades and the widget position, are saved in `config/villagerexplorer.properties`.
 
----
+## Building from source
 
-## How It Works
+The project uses a MultiLoader setup. Shared code lives in `common`, while `fabric` and `neoforge` only contain the small loader specific parts.
 
-1. **Open the Villager Info Screen**  
-   Use the openGUI keybind (Default: V).
+```
+./gradlew build                 builds both jars into fabric/build/libs and neoforge/build/libs
+./gradlew :fabric:runClient     starts a Fabric dev client
+./gradlew :neoforge:runClient   starts a NeoForge dev client
+```
 
-2. **Browse Villager Details**  
-   Instantly see the villager’s name, profession, job site block, and all available trades in a clear, organized layout.
+After a Minecraft update the trade data can be regenerated from the new game jar:
 
-3. **Explore Trades and Items**  
-   Hover over any item in the crafting grid, job site, or trade list to view its tooltip.
+```
+python tools/generate_trades.py <minecraft.jar> common/src/main/resources/assets/villagerexplorer/trades.json
+```
 
----
+## License
 
-## Configuration 🔧
-
-- **Keybinds**  
-  You can configure the keybind via Minecraft’s controls menu.
-
-- **GUI Styles**  
-  Pick a style via Mod Menu (Fabric), the NeoForge mod list, `/villagerexplorer style` or directly with `/villagerexplorer style <vanilla|modern|refined|ledger>`.  
-  The choice is saved to `config/villagerexplorer.properties`. `/villagerexplorer` opens the GUI.
-
----
-
-## Development
-
-This branch uses a MultiLoader setup: `common` holds the shared code, `fabric` and `neoforge` only contain the loader entrypoints.
-
-- `./gradlew build` builds both jars into `fabric/build/libs` and `neoforge/build/libs`.
-- `./gradlew :fabric:runClient` / `./gradlew :neoforge:runClient` start a dev client.
-- Trades are generated from the vanilla data in the Minecraft jar:  
-  `python tools/generate_trades.py <minecraft.jar> common/src/main/resources/assets/villagerexplorer/trades.json`
+MIT, see [LICENSE.txt](LICENSE.txt).
