@@ -200,13 +200,6 @@ public class VillagerInfoScreen extends Screen {
         JobSiteRecipe jobSite = this.merchant.jobSite();
         if (jobSite != null) {
             this.extractJobSite(graphics, jobSite, right - 120, windowY + this.layout.jobSiteY(), mouseX, mouseY);
-        } else {
-            int x = right - 120;
-            int y = windowY + this.layout.jobSiteY();
-            this.style.sectionLabel(graphics, this.font, "Spawning", x, y - 14);
-            this.style.bodyText(graphics, this.font, "No job site. Appears", x, y);
-            this.style.bodyText(graphics, this.font, "near players with two", x, y + 11);
-            this.style.bodyText(graphics, this.font, "trader llamas.", x, y + 22);
         }
 
         super.extractRenderState(graphics, mouseX, mouseY, a);
@@ -219,7 +212,6 @@ public class VillagerInfoScreen extends Screen {
         this.scrollPixels = this.motion.approach(this.scrollPixels, this.scrollOffset * ROW_HEIGHT, 50.0F);
         int first = (int) (this.scrollPixels / ROW_HEIGHT);
         int end = Math.min(this.rows.size(), first + visible + 1);
-        TradeGroup lastGroup = null;
         this.clipTop = tableY - 3;
         this.clipBottom = tableY + visible * ROW_HEIGHT - 3;
         graphics.enableScissor(tableX - 6, this.clipTop, tableX + TABLE_WIDTH, this.clipBottom);
@@ -238,16 +230,8 @@ public class VillagerInfoScreen extends Screen {
                 this.style.rowHighlight(graphics, tableX + this.layout.levelWidth() - 3, y - 2, TABLE_WIDTH - this.layout.levelWidth() - 2, ROW_HEIGHT - 2);
             }
 
-            if (row.group() != lastGroup) {
-                if (lastGroup != null) {
-                    this.style.levelDivider(graphics, tableX - 5, y - 3, TABLE_WIDTH);
-                }
-                TradeGroup group = row.group();
-                this.style.levelLabel(graphics, this.font, group.displayName(), group.color(), tableX - 5, y);
-                if (this.visibleAt(mouseY) && inside(mouseX, mouseY, tableX - 5, y, this.layout.levelWidth() - 4, ROW_HEIGHT)) {
-                    graphics.setTooltipForNextFrame(this.font, Component.literal(this.offerText(group)), mouseX, mouseY);
-                }
-                lastGroup = group;
+            if (index > 0 && this.rows.get(index - 1).group() != row.group()) {
+                this.style.levelDivider(graphics, tableX - 5, y - 3, TABLE_WIDTH);
             }
 
             int slotX = tableX + this.layout.levelWidth();
@@ -263,6 +247,7 @@ public class VillagerInfoScreen extends Screen {
             this.extractBiomeIcons(graphics, trade, givenX + SLOT_SIZE + 4, y + 5, mouseX, mouseY);
         }
 
+        this.extractGroupLabels(graphics, tableX, tableY, mouseX, mouseY);
         graphics.disableScissor();
 
         if (this.rows.isEmpty()) {
@@ -271,6 +256,29 @@ public class VillagerInfoScreen extends Screen {
 
         this.scrollBar.update(tableX + 230, tableY, visible * ROW_HEIGHT, visible, this.rows.size(), this.scrollPixels / ROW_HEIGHT);
         this.scrollBar.extract(this.style, graphics);
+    }
+
+    // labels stick to the top of the list until the last row of their group scrolls past
+    private void extractGroupLabels(GuiGraphicsExtractor graphics, int tableX, int tableY, int mouseX, int mouseY) {
+        int start = 0;
+        while (start < this.rows.size()) {
+            TradeGroup group = this.rows.get(start).group();
+            int end = start;
+            while (end + 1 < this.rows.size() && this.rows.get(end + 1).group() == group) {
+                end++;
+            }
+
+            int firstY = tableY + Math.round(start * ROW_HEIGHT - this.scrollPixels);
+            int lastY = tableY + Math.round(end * ROW_HEIGHT - this.scrollPixels);
+            int y = Math.min(Math.max(firstY, tableY), lastY);
+            if (y + ROW_HEIGHT > this.clipTop && y < this.clipBottom) {
+                this.style.levelLabel(graphics, this.font, group.displayName(), group.color(), tableX - 5, y);
+                if (this.visibleAt(mouseY) && inside(mouseX, mouseY, tableX - 5, y, this.layout.levelWidth() - 4, ROW_HEIGHT)) {
+                    graphics.setTooltipForNextFrame(this.font, Component.literal(this.offerText(group)), mouseX, mouseY);
+                }
+            }
+            start = end + 1;
+        }
     }
 
     private String offerText(TradeGroup group) {
