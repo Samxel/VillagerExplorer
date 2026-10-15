@@ -1,0 +1,30 @@
+name: Version Update Request
+description: Request support for a newer Minecraft version.
+title: "[Update]: Minecraft "
+labels: ["version update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check the open issues first — there may already be a request for this version.
+  - type: input
+    id: mc-version
+    attributes:
+      label: Requested Minecraft version
+      placeholder: e.g. 1.21.11
+    validations:
+      required: true
+  - type: dropdown
+    id: loader
+    attributes:
+      label: Mod loader
+      options:
+        - Fabric
+        - Other (please specify below)
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Anything else, e.g. modpacks you'd like to use it in.

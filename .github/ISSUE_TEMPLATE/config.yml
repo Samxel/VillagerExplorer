@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: CurseForge
+    url: https://www.curseforge.com/minecraft/mc-mods/villagerexplorer
+    about: Download the latest release on CurseForge.
+  - name: Modrinth
+    url: https://modrinth.com/mod/villagerexplorer
+    about: Download the latest release on Modrinth.

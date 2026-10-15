@@ -1,0 +1,73 @@
+name: Bug Report
+description: Something isn't working as expected.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please make sure it hasn't been reported already.
+  - type: input
+    id: mod-version
+    attributes:
+      label: Villager Explorer version
+      placeholder: e.g. 1.21.10-1.0
+    validations:
+      required: true
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft version
+      placeholder: e.g. 1.21.10
+    validations:
+      required: true
+  - type: input
+    id: fabric-versions
+    attributes:
+      label: Fabric Loader / Fabric API version
+      placeholder: e.g. 0.17.3 / 0.136.0+1.21.10
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Where does it happen?
+      options:
+        - Singleplayer
+        - Multiplayer (server)
+        - Both
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Right-click a villager while ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other installed mods
+      description: List other mods, especially ones that change villagers or GUIs.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / crash report
+      description: Paste `latest.log` or the crash report (or a link to mclo.gs).
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this hasn't been reported yet.
+          required: true
+        - label: I can reproduce this with only Villager Explorer and Fabric API installed.
