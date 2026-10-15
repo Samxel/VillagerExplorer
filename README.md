@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/assets/logo.png" alt="Villager Explorer" width="256">
+</p>
+
 <h1 align="center">Villager Explorer</h1>
 
 A client-side mod for Minecraft 26.3 that shows you everything villagers and the wandering trader have to offer. Available for Fabric and NeoForge.
