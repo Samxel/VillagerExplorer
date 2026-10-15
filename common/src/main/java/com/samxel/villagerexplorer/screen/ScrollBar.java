@@ -16,13 +16,13 @@ final class ScrollBar {
     private boolean dragging;
     private double grabOffset;
 
-    void update(int x, int y, int height, int visible, int total, int offset) {
+    void update(int x, int y, int height, int visible, int total, double offset) {
         this.x = x;
         this.y = y;
         this.height = height;
         this.max = Math.max(0, total - visible);
         this.thumbHeight = total <= 0 ? height : Math.max(MIN_THUMB, Math.min(height, height * visible / total));
-        this.thumbY = this.max == 0 ? y : y + (height - this.thumbHeight) * offset / this.max;
+        this.thumbY = this.max == 0 ? y : y + (int) Math.round((height - this.thumbHeight) * Math.clamp(offset / this.max, 0.0, 1.0));
     }
 
     boolean visible() {

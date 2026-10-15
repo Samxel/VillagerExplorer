@@ -43,6 +43,10 @@ public abstract class GuiStyle {
         graphics.fill(x, y, x + width, y + height, 0x30FFFF80);
     }
 
+    public void rowHover(GuiGraphicsExtractor graphics, int x, int y, int width, int height) {
+        graphics.fill(x, y, x + width, y + height, 0x14FFFFFF);
+    }
+
     public int bodyColor() {
         return 0xFFAAAAAA;
     }

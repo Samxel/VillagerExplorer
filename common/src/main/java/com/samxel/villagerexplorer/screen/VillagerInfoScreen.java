@@ -39,6 +39,10 @@ public class VillagerInfoScreen extends Screen {
     private final Screen parent;
     private final List<TradeGroup> groups;
     private final ScrollBar scrollBar = new ScrollBar();
+    private final Motion motion = new Motion();
+    private float scrollPixels;
+    private int clipTop;
+    private int clipBottom;
     private List<Row> rows = List.of();
     private GuiStyle style;
     private Layout layout;
@@ -139,10 +143,12 @@ public class VillagerInfoScreen extends Screen {
         if (this.merchant.isVillager()) {
             int y = this.windowY() + this.layout.biomeY();
             if (inside(event.x(), event.y(), this.biomeX(), y, BIOME_BUTTON, BIOME_BUTTON)) {
+                Motion.click();
                 this.cycleBiome(-1);
                 return true;
             }
             if (inside(event.x(), event.y(), this.biomeX() + BIOME_WIDTH - BIOME_BUTTON, y, BIOME_BUTTON, BIOME_BUTTON)) {
+                Motion.click();
                 this.cycleBiome(1);
                 return true;
             }
@@ -170,6 +176,7 @@ public class VillagerInfoScreen extends Screen {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        this.motion.frame();
         int windowX = this.windowX();
         int windowY = this.windowY();
         int right = windowX + this.layout.width();
@@ -209,14 +216,24 @@ public class VillagerInfoScreen extends Screen {
         this.style.sectionLabel(graphics, this.font, "Trades", tableX - 5, tableY - 14);
 
         int visible = this.layout.tradesVisible();
-        int end = Math.min(this.rows.size(), this.scrollOffset + visible);
+        this.scrollPixels = this.motion.approach(this.scrollPixels, this.scrollOffset * ROW_HEIGHT, 50.0F);
+        int first = (int) (this.scrollPixels / ROW_HEIGHT);
+        int end = Math.min(this.rows.size(), first + visible + 1);
         TradeGroup lastGroup = null;
+        this.clipTop = tableY - 3;
+        this.clipBottom = tableY + visible * ROW_HEIGHT - 3;
+        graphics.enableScissor(tableX - 6, this.clipTop, tableX + TABLE_WIDTH, this.clipBottom);
 
-        for (int index = this.scrollOffset; index < end; index++) {
+        for (int index = first; index < end; index++) {
             Row row = this.rows.get(index);
             Trade trade = row.trade();
-            int y = tableY + (index - this.scrollOffset) * ROW_HEIGHT;
+            int y = tableY + Math.round(index * ROW_HEIGHT - this.scrollPixels);
 
+            int rowX = tableX + this.layout.levelWidth() - 3;
+            int rowWidth = TABLE_WIDTH - this.layout.levelWidth() - 2;
+            if (this.visibleAt(mouseY) && inside(mouseX, mouseY, rowX, y - 2, rowWidth, ROW_HEIGHT - 2)) {
+                this.style.rowHover(graphics, rowX, y - 2, rowWidth, ROW_HEIGHT - 2);
+            }
             if (this.search.matches(trade)) {
                 this.style.rowHighlight(graphics, tableX + this.layout.levelWidth() - 3, y - 2, TABLE_WIDTH - this.layout.levelWidth() - 2, ROW_HEIGHT - 2);
             }
@@ -227,7 +244,7 @@ public class VillagerInfoScreen extends Screen {
                 }
                 TradeGroup group = row.group();
                 this.style.levelLabel(graphics, this.font, group.displayName(), group.color(), tableX - 5, y);
-                if (inside(mouseX, mouseY, tableX - 5, y, this.layout.levelWidth() - 4, ROW_HEIGHT)) {
+                if (this.visibleAt(mouseY) && inside(mouseX, mouseY, tableX - 5, y, this.layout.levelWidth() - 4, ROW_HEIGHT)) {
                     graphics.setTooltipForNextFrame(this.font, Component.literal(this.offerText(group)), mouseX, mouseY);
                 }
                 lastGroup = group;
@@ -246,11 +263,13 @@ public class VillagerInfoScreen extends Screen {
             this.extractBiomeIcons(graphics, trade, givenX + SLOT_SIZE + 4, y + 5, mouseX, mouseY);
         }
 
+        graphics.disableScissor();
+
         if (this.rows.isEmpty()) {
             this.style.bodyText(graphics, this.font, "No trades for this biome", tableX, tableY + 4);
         }
 
-        this.scrollBar.update(tableX + 230, tableY, visible * ROW_HEIGHT, visible, this.rows.size(), this.scrollOffset);
+        this.scrollBar.update(tableX + 230, tableY, visible * ROW_HEIGHT, visible, this.rows.size(), this.scrollPixels / ROW_HEIGHT);
         this.scrollBar.extract(this.style, graphics);
     }
 
@@ -265,7 +284,7 @@ public class VillagerInfoScreen extends Screen {
         ItemStack current = stack.current();
         this.style.slot(graphics, x, y, SLOT_SIZE);
         this.style.item(graphics, this.font, current, x, y);
-        if (!inside(mouseX, mouseY, x, y, SLOT_SIZE, SLOT_SIZE) || this.scrollBar.dragging()) {
+        if (!this.visibleAt(mouseY) || !inside(mouseX, mouseY, x, y, SLOT_SIZE, SLOT_SIZE) || this.scrollBar.dragging()) {
             return;
         }
 
@@ -298,7 +317,7 @@ public class VillagerInfoScreen extends Screen {
             graphics.item(trade.biomes().get(i).icon(), 0, 0);
             graphics.pose().popMatrix();
         }
-        if (inside(mouseX, mouseY, x, y, trade.biomes().size() * 9, 9)) {
+        if (this.visibleAt(mouseY) && inside(mouseX, mouseY, x, y, trade.biomes().size() * 9, 9)) {
             graphics.setTooltipForNextFrame(this.font, Component.literal("Only " + biomeNames(trade) + " villagers"), mouseX, mouseY);
         }
     }
@@ -360,6 +379,10 @@ public class VillagerInfoScreen extends Screen {
         if (inside(mouseX, mouseY, x, y, SLOT_SIZE, SLOT_SIZE)) {
             graphics.setTooltipForNextFrame(this.font, stack, mouseX, mouseY);
         }
+    }
+
+    private boolean visibleAt(int mouseY) {
+        return mouseY >= this.clipTop && mouseY < this.clipBottom;
     }
 
     private static boolean inside(double mouseX, double mouseY, int x, int y, int width, int height) {

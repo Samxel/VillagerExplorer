@@ -35,6 +35,9 @@ public class VillagerExplorerScreen extends Screen {
     private final Map<Merchant, ItemStack> matchedItems = new EnumMap<>(Merchant.class);
     private final List<Tile> visibleTiles = new ArrayList<>();
     private final ScrollBar scrollBar = new ScrollBar();
+    private final Motion motion = new Motion();
+    private final Map<Merchant, Float> hoverProgress = new EnumMap<>(Merchant.class);
+    private float scrollPixels;
     private List<Merchant> filtered = List.of();
     private TradeSearch search = TradeSearch.EMPTY;
     private String query = "";
@@ -186,6 +189,7 @@ public class VillagerExplorerScreen extends Screen {
         }
         for (Tile tile : this.visibleTiles) {
             if (tile.contains(event.x(), event.y())) {
+                Motion.click();
                 this.minecraft.gui.setScreen(new VillagerInfoScreen(tile.merchant(), this.search, this));
                 return true;
             }
@@ -213,6 +217,7 @@ public class VillagerExplorerScreen extends Screen {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        this.motion.frame();
         int windowX = this.windowX();
         int windowY = this.windowY();
         this.visibleTiles.clear();
@@ -231,39 +236,56 @@ public class VillagerExplorerScreen extends Screen {
             this.style.bodyText(graphics, this.font, text, windowX + (this.layout.width() - this.font.width(text)) / 2, startY + 20);
         }
 
-        int lastRow = Math.min(this.rowCount(), this.scrollOffset + this.visibleRows());
-        for (int row = this.scrollOffset; row < lastRow; row++) {
+        int step = this.tileSize + TILE_SPACING;
+        this.scrollPixels = this.motion.approach(this.scrollPixels, this.scrollOffset * step, 60.0F);
+        int clipTop = startY - 3;
+        int clipBottom = Math.min(windowY + this.tileAreaBottom(), startY + this.visibleRows() * step - TILE_SPACING + 3);
+        graphics.enableScissor(windowX + 2, clipTop, windowX + this.layout.width() - 12, clipBottom);
+
+        int firstRow = (int) (this.scrollPixels / step);
+        int lastRow = Math.min(this.rowCount(), firstRow + this.visibleRows() + 1);
+        boolean mouseInClip = mouseY >= clipTop && mouseY < clipBottom && !this.scrollBar.dragging();
+        for (int row = firstRow; row < lastRow; row++) {
             int tilesInRow = Math.min(TILES_PER_ROW, this.filtered.size() - row * TILES_PER_ROW);
             int rowWidth = tilesInRow * this.tileSize + (tilesInRow - 1) * TILE_SPACING;
             int rowStartX = windowX + (this.layout.width() - rowWidth) / 2;
 
             for (int col = 0; col < tilesInRow; col++) {
                 Merchant merchant = this.filtered.get(row * TILES_PER_ROW + col);
-                int x = rowStartX + col * (this.tileSize + TILE_SPACING);
-                int y = startY + (row - this.scrollOffset) * (this.tileSize + TILE_SPACING);
+                int x = rowStartX + col * step;
+                int y = startY + Math.round(row * step - this.scrollPixels);
                 Tile tile = new Tile(x, y, this.tileSize, merchant);
-                this.extractTile(graphics, tile, tile.contains(mouseX, mouseY) && !this.scrollBar.dragging(), mouseX, mouseY);
-                this.visibleTiles.add(tile);
+                boolean hovered = mouseInClip && tile.contains(mouseX, mouseY);
+                float progress = this.motion.approach(this.hoverProgress.getOrDefault(merchant, 0.0F), hovered ? 1.0F : 0.0F, 70.0F);
+                this.hoverProgress.put(merchant, progress);
+                this.extractTile(graphics, tile, hovered, Motion.ease(progress), mouseX, mouseY);
+                if (y + this.tileSize > clipTop && y < clipBottom) {
+                    this.visibleTiles.add(tile);
+                }
             }
         }
+        graphics.disableScissor();
 
         int barArea = this.tileAreaBottom() - this.layout.tileTop();
-        this.scrollBar.update(windowX + this.layout.width() - 10, startY, barArea, this.visibleRows(), this.rowCount(), this.scrollOffset);
+        this.scrollBar.update(windowX + this.layout.width() - 10, startY, barArea, this.visibleRows(), this.rowCount(), this.scrollPixels / step);
         this.scrollBar.extract(this.style, graphics);
 
         super.extractRenderState(graphics, mouseX, mouseY, a);
     }
 
-    private void extractTile(GuiGraphicsExtractor graphics, Tile tile, boolean hovered, int mouseX, int mouseY) {
+    private void extractTile(GuiGraphicsExtractor graphics, Tile tile, boolean hovered, float hover, int mouseX, int mouseY) {
         int size = tile.size();
         this.style.tile(graphics, tile.x(), tile.y(), size, hovered);
 
         LivingEntity preview = this.previews.get(tile.merchant());
         if (preview != null) {
-            int boxHalf = size * 28 / TILE_SIZE;
-            int boxTop = tile.y() + size / 9;
+            float grow = 1.0F + 0.08F * hover;
+            int baseHalf = size * 28 / TILE_SIZE;
+            int boxHalf = Math.round(baseHalf * grow);
+            int centerY = tile.y() + size / 9 + baseHalf;
             int centerX = tile.x() + size / 2;
-            VillagerPreview.extractFacingFront(graphics, preview, centerX - boxHalf, boxTop, centerX + boxHalf, boxTop + boxHalf * 2, 30.0F * size / TILE_SIZE);
+            VillagerPreview.extractFacingFront(graphics, preview, centerX - boxHalf, centerY - boxHalf, centerX + boxHalf, centerY + boxHalf,
+                    30.0F * size / TILE_SIZE * grow);
         }
 
         String name = tile.merchant().displayName();

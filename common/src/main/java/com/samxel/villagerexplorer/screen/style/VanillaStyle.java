@@ -89,4 +89,9 @@ public class VanillaStyle extends GuiStyle {
     public void button(GuiGraphicsExtractor graphics, int x, int y, int width, int height, boolean hovered) {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, hovered ? BUTTON_HIGHLIGHTED : BUTTON, x, y, width, height);
     }
+
+    @Override
+    public void rowHover(GuiGraphicsExtractor graphics, int x, int y, int width, int height) {
+        graphics.fill(x, y, x + width, y + height, 0x20000000);
+    }
 }
