@@ -26,8 +26,17 @@ The trade data comes straight from the vanilla game files, so prices, max uses a
 ### Trade overview
 Every trade a profession can offer, grouped by level. Hovering an item shows its normal tooltip plus max uses, villager XP, the price range for enchanted items and things like random enchantments or dye colors.
 
+<p align="center">
+  <img src=".github/assets/explorer.png" alt="Explorer overview" width="400">
+  <img src=".github/assets/detail-view.png" alt="Trade list of a librarian" width="400">
+</p>
+
 ### Pinned trades
 Click the star next to a trade to pin it. Pinned trades stay visible in a small widget on your screen, which is handy when you are hunting for a specific book. Open the chat to move the widget around or remove entries.
+
+<p align="center">
+  <img src=".github/assets/pinned-trades.png" alt="Pinned trades widget" width="600">
+</p>
 
 ### Quick open
 Look at a villager or wandering trader and press `V` to jump straight to its trades, with the right profession and biome already selected.
