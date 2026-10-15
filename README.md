@@ -35,6 +35,14 @@ Look at a villager or wandering trader and press `V` to jump straight to its tra
 ### GUI styles
 Choose between Vanilla, Modern, Refined and Ledger. The pinned trades widget follows the style you pick, and the GUI scales down on small screens and high GUI scales.
 
+<p align="center">
+  <img src=".github/assets/style-vanilla.png" alt="Vanilla style" width="400">
+  <img src=".github/assets/style-modern.png" alt="Modern style" width="400">
+  <br>
+  <img src=".github/assets/style-refined.png" alt="Refined style" width="400">
+  <img src=".github/assets/style-ledger.png" alt="Ledger style" width="400">
+</p>
+
 ## Settings
 
 You can change the key in Minecraft's controls menu. The GUI style can be picked through Mod Menu on Fabric, the mod list on NeoForge or the command `/villagerexplorer style`. If you already know which one you want, `/villagerexplorer style <vanilla|modern|refined|ledger>` sets it directly.
