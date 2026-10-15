@@ -376,9 +376,7 @@ public class VillagerInfoScreen extends Screen {
 
         int resultX = gridX + SLOT_SIZE * 4 + 4;
         int resultY = gridY + SLOT_SIZE;
-        if (this.style.framedResult()) {
-            this.style.slot(graphics, resultX, resultY, SLOT_SIZE);
-        }
+        this.style.slot(graphics, resultX, resultY, SLOT_SIZE);
         this.style.item(graphics, this.font, recipe.result(), resultX, resultY);
         this.itemTooltip(graphics, recipe.result(), resultX, resultY, mouseX, mouseY);
     }

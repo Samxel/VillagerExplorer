@@ -25,6 +25,14 @@ public abstract class GuiStyle {
         return 0xFFE0E0E0;
     }
 
+    public boolean searchTextShadow() {
+        return true;
+    }
+
+    public int searchHintColor() {
+        return 0xFF555555;
+    }
+
     public abstract void tile(GuiGraphicsExtractor graphics, int x, int y, int size, boolean hovered);
 
     public abstract void tileLabel(GuiGraphicsExtractor graphics, Font font, String text, int centerX, int y, boolean hovered);
@@ -68,10 +76,6 @@ public abstract class GuiStyle {
     public void item(GuiGraphicsExtractor graphics, Font font, ItemStack stack, int x, int y) {
         graphics.item(stack, x + 1, y + 1);
         graphics.itemDecorations(font, stack, x + 1, y + 1);
-    }
-
-    public boolean framedResult() {
-        return true;
     }
 
     public abstract void arrow(GuiGraphicsExtractor graphics, Font font, int x, int y);

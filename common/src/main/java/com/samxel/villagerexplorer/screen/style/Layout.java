@@ -19,7 +19,6 @@ public record Layout(
         int biomeY,
         int jobSiteY
 ) {
-    public static final Layout CLASSIC = new Layout(420, 340, 55, 85, 140, 30, 70, 50, 110, 7, 60, 25, -40, 240, 1.0F, 198, 226);
     public static final Layout COMPACT = new Layout(420, 300, 14, 32, 64, 17, 14, 22, 46, 10, 68, 45, 28, 152, 0.0625F, 158, 216);
 
     private static final int SCREEN_MARGIN = 8;
@@ -31,9 +30,7 @@ public record Layout(
         if (this.height <= available) {
             return this;
         }
-        // the classic layout wastes too much space at the top, so it falls back to the compact metrics
-        Layout base = this == CLASSIC ? COMPACT : this;
-        return base.height <= available ? base : base.shrinkTo(available);
+        return this.shrinkTo(available);
     }
 
     private Layout shrinkTo(int available) {

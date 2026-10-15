@@ -4,12 +4,12 @@ import java.util.Locale;
 import java.util.Optional;
 
 public enum GuiStyles {
-    CLASSIC(new ClassicStyle()),
     VANILLA(new VanillaStyle()),
     MODERN(new ModernStyle()),
-    REFINED(new RefinedStyle());
+    REFINED(new RefinedStyle()),
+    LEDGER(new LedgerStyle());
 
-    private static GuiStyles current = CLASSIC;
+    private static GuiStyles current = VANILLA;
 
     private final GuiStyle style;
 

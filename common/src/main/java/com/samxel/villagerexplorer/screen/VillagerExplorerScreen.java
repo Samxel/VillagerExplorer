@@ -67,7 +67,7 @@ public class VillagerExplorerScreen extends Screen {
         this.style = GuiStyles.current().style();
         this.layout = this.style.layout().fit(this.height);
         int area = this.tileAreaBottom() - this.layout.tileTop();
-        this.tileSize = this.layout == Layout.CLASSIC ? TILE_SIZE : Math.clamp((area - TILE_SPACING) / 2, MIN_TILE_SIZE, TILE_SIZE);
+        this.tileSize = Math.clamp((area - TILE_SPACING) / 2, MIN_TILE_SIZE, TILE_SIZE);
 
         int searchX = this.windowX() + 20;
         int searchY = this.windowY() + this.layout.searchY();
@@ -79,7 +79,10 @@ public class VillagerExplorerScreen extends Screen {
             this.searchField.setBordered(false);
             this.searchField.setTextColor(this.style.searchTextColor());
         }
-        this.searchField.setHint(SEARCH_HINT);
+        this.searchField.setTextShadow(this.style.searchTextShadow());
+        if (this.style.searchTextShadow()) {
+            this.searchField.setHint(SEARCH_HINT);
+        }
         this.searchField.setValue(this.query);
         this.searchField.setResponder(this::updateFilter);
         this.addRenderableWidget(this.searchField);
@@ -271,6 +274,17 @@ public class VillagerExplorerScreen extends Screen {
         this.scrollBar.extract(this.style, graphics);
 
         super.extractRenderState(graphics, mouseX, mouseY, a);
+        this.extractFlatHint(graphics);
+    }
+
+    // EditBox always draws its hint with a drop shadow, which smears on light backgrounds
+    private void extractFlatHint(GuiGraphicsExtractor graphics) {
+        if (this.style.searchTextShadow() || this.searchField.isFocused() || !this.searchField.getValue().isEmpty()) {
+            return;
+        }
+        int x = this.searchField.getX() + (this.style.borderedSearch() ? 4 : 0);
+        int y = this.searchField.getY() + (this.style.borderedSearch() ? (SEARCH_HEIGHT - 8) / 2 : 0);
+        graphics.text(this.font, SEARCH_HINT, x, y, this.style.searchHintColor(), false);
     }
 
     private void extractTile(GuiGraphicsExtractor graphics, Tile tile, boolean hovered, float hover, int mouseX, int mouseY) {

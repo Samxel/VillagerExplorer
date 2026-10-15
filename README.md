@@ -48,7 +48,7 @@
   Browse everything the wandering trader can buy and sell, including how many offers of each group he picks.
 
 - **Four GUI Styles**  
-  Classic, Vanilla, Modern and Refined. The GUI also shrinks to fit small screens and high GUI scales.
+  Vanilla, Modern, Refined and Ledger. The GUI also shrinks to fit small screens and high GUI scales.
 
 ---
 
@@ -71,7 +71,7 @@
   You can configure the keybind via Minecraft’s controls menu.
 
 - **GUI Styles**  
-  Pick a style via Mod Menu (Fabric), the NeoForge mod list, `/villagerexplorer style` or directly with `/villagerexplorer style <classic|vanilla|modern|refined>`.  
+  Pick a style via Mod Menu (Fabric), the NeoForge mod list, `/villagerexplorer style` or directly with `/villagerexplorer style <vanilla|modern|refined|ledger>`.  
   The choice is saved to `config/villagerexplorer.properties`. `/villagerexplorer` opens the GUI.
 
 ---
