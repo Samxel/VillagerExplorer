@@ -7,18 +7,20 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 
 public class VanillaStyle extends GuiStyle {
-    private static final Identifier PANEL = Identifier.withDefaultNamespace("popup/background");
     private static final Identifier BUTTON = Identifier.withDefaultNamespace("widget/button");
     private static final Identifier BUTTON_HIGHLIGHTED = Identifier.withDefaultNamespace("widget/button_highlighted");
     private static final Identifier SLOT = Identifier.withDefaultNamespace("container/slot");
     private static final Identifier TRADE_ARROW = Identifier.withDefaultNamespace("container/villager/trade_arrow");
-    private static final Identifier SCROLLER = Identifier.withDefaultNamespace("widget/scroller");
-    private static final Identifier SCROLLER_BACKGROUND = Identifier.withDefaultNamespace("widget/scroller_background");
     private static final int LABEL = 0xFF404040;
 
     @Override
     public void panel(GuiGraphicsExtractor graphics, int x, int y, int width, int height) {
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, PANEL, x, y, width, height);
+        graphics.fill(x + 1, y + 1, x + width - 1, y + height - 1, 0xFFC6C6C6);
+        roundedOutline(graphics, x, y, width, height, 0xFF000000);
+        graphics.fill(x + 2, y + 1, x + width - 3, y + 3, 0xFFFFFFFF);
+        graphics.fill(x + 1, y + 2, x + 3, y + height - 3, 0xFFFFFFFF);
+        graphics.fill(x + 3, y + height - 3, x + width - 2, y + height - 1, 0xFF555555);
+        graphics.fill(x + width - 3, y + 3, x + width - 1, y + height - 2, 0xFF555555);
     }
 
     @Override
@@ -64,12 +66,13 @@ public class VanillaStyle extends GuiStyle {
 
     @Override
     public void arrow(GuiGraphicsExtractor graphics, Font font, int x, int y) {
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TRADE_ARROW, x, y + 4, 10, 9);
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TRADE_ARROW, x, y + 4, 10, 9, 0xFF555555);
     }
 
     @Override
     public void scrollbar(GuiGraphicsExtractor graphics, int x, int y, int height, int thumbY, int thumbHeight) {
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SCROLLER_BACKGROUND, x, y, 6, height);
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SCROLLER, x, thumbY, 6, thumbHeight);
+        bevel(graphics, x - 1, y, 8, height, 0xFF8B8B8B, 0xFF373737, 0xFFFFFFFF);
+        graphics.outline(x, thumbY, 6, thumbHeight, 0xFF000000);
+        bevel(graphics, x + 1, thumbY + 1, 4, thumbHeight - 2, 0xFFC6C6C6, 0xFFFFFFFF, 0xFF555555);
     }
 }

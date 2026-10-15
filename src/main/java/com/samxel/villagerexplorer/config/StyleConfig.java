@@ -2,7 +2,6 @@ package com.samxel.villagerexplorer.config;
 
 import com.samxel.villagerexplorer.VillagerExplorer;
 import com.samxel.villagerexplorer.screen.style.GuiStyles;
-import net.minecraft.client.Minecraft;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -13,12 +12,13 @@ import java.util.Properties;
 
 public final class StyleConfig {
     private static final String STYLE_KEY = "style";
+    private static Path file;
 
     private StyleConfig() {
     }
 
-    public static void load() {
-        Path file = file();
+    public static void load(Path configDir) {
+        file = configDir.resolve(VillagerExplorer.MOD_ID + ".properties");
         if (!Files.exists(file)) {
             return;
         }
@@ -35,7 +35,10 @@ public final class StyleConfig {
     }
 
     public static void save() {
-        Path file = file();
+        if (file == null) {
+            return;
+        }
+
         Properties properties = new Properties();
         properties.setProperty(STYLE_KEY, GuiStyles.current().id());
         try {
@@ -46,9 +49,5 @@ public final class StyleConfig {
         } catch (IOException e) {
             VillagerExplorer.LOGGER.warn("Failed to write {}", file, e);
         }
-    }
-
-    private static Path file() {
-        return Minecraft.getInstance().gameDirectory.toPath().resolve("config").resolve(VillagerExplorer.MOD_ID + ".properties");
     }
 }

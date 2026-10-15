@@ -5,6 +5,7 @@ import com.samxel.villagerexplorer.VillagerExplorer;
 import com.samxel.villagerexplorer.config.StyleConfig;
 import com.samxel.villagerexplorer.screen.VillagerExplorerScreen;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
@@ -18,7 +19,7 @@ public class VillagerExplorerClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        StyleConfig.load();
+        StyleConfig.load(FabricLoader.getInstance().getConfigDir());
         KeyMappingHelper.registerKeyMapping(OPEN_GUI);
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, context) -> dispatcher.register(VillagerExplorerCommand.create()));
         ClientTickEvents.END_CLIENT_TICK.register(VillagerExplorerClient::onTick);

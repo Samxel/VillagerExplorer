@@ -2,7 +2,7 @@
   <img src="https://github.com/user-attachments/assets/c3c52df9-fb44-42e5-8653-2c1a0a9b5cd8" alt="villagerexplorer_header" width="256""/>
 </p>
 
-<h1 align="center">Villager Explorer<br>1.21.10</h1>
+<h1 align="center">Villager Explorer<br>26.3 (Fabric)</h1>
 
 <p align="center">
   <b>Available at:</b><br>
@@ -57,3 +57,7 @@
 
 - **Keybinds**  
   You can configure the keybind via Minecraft’s controls menu.
+
+- **GUI Styles**  
+  Switch between four looks with `/villagerexplorer style <classic|vanilla|modern|refined>`.  
+  The choice is saved to `config/villagerexplorer.properties`. `/villagerexplorer` opens the GUI.

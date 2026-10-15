@@ -22,7 +22,6 @@ public class VillagerInfoScreen extends Screen {
     private static final int SLOT_SIZE = 18;
     private static final int SLOT_SPACING = 4;
     private static final int ROW_HEIGHT = SLOT_SIZE + 6;
-    private static final int LEVEL_WIDTH = 60;
     private static final int PREVIEW_SIZE = 45;
 
     private final Profession profession;
@@ -109,7 +108,7 @@ public class VillagerInfoScreen extends Screen {
                 lastLevel = trade.level();
             }
 
-            int slotX = tableX + LEVEL_WIDTH;
+            int slotX = tableX + this.layout.levelWidth();
             for (ItemStack stack : trade.wanted()) {
                 this.extractSlot(graphics, stack, slotX, y, mouseX, mouseY);
                 slotX += SLOT_SIZE + SLOT_SPACING;

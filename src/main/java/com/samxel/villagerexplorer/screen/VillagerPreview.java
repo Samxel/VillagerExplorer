@@ -31,6 +31,8 @@ public final class VillagerPreview {
             return null;
         }
 
+        // preview entities are never spawned, but rendering requires an ID; negative IDs can't clash with server ones
+        villager.setId(-1 - profession.ordinal());
         villager.setVillagerData(villager.getVillagerData().withProfession(level.registryAccess(), profession.key()));
         return villager;
     }
