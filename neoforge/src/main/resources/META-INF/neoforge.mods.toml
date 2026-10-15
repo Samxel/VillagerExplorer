@@ -12,7 +12,7 @@ description = '''${description}'''
 [[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "required"
-versionRange = "[${neoforge_version},)"
+versionRange = "[${neoforge_min_version},)"
 ordering = "NONE"
 side = "CLIENT"
 
