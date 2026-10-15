@@ -1,0 +1,4914 @@
+{
+ "farmer": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:wheat"
+       ],
+       "count": 20
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:potato"
+       ],
+       "count": 26
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:carrot"
+       ],
+       "count": 22
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:beetroot"
+       ],
+       "count": 15
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:bread"
+      ],
+      "count": 6
+     },
+     "maxUses": 16,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:pumpkin"
+       ],
+       "count": 6
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:pumpkin_pie"
+      ],
+      "count": 4
+     },
+     "maxUses": 12,
+     "xp": 5
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:apple"
+      ],
+      "count": 4
+     },
+     "maxUses": 16,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cookie"
+      ],
+      "count": 18
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:melon"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cake"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:suspicious_stew"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "modifier": "stew"
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:golden_carrot"
+      ],
+      "count": 3
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:glistering_melon_slice"
+      ],
+      "count": 3
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  }
+ ],
+ "librarian": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:paper"
+       ],
+       "count": 24
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      },
+      {
+       "items": [
+        "minecraft:book"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:enchanted_book"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1,
+     "modifier": "book",
+     "price": [
+      5,
+      64
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 9
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:bookshelf"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:book"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      },
+      {
+       "items": [
+        "minecraft:book"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:enchanted_book"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "book",
+     "price": [
+      5,
+      64
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:lantern"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:ink_sac"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      },
+      {
+       "items": [
+        "minecraft:book"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:enchanted_book"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10,
+     "modifier": "book",
+     "price": [
+      5,
+      64
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:glass"
+      ],
+      "count": 4
+     },
+     "maxUses": 12,
+     "xp": 10
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:writable_book"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      },
+      {
+       "items": [
+        "minecraft:book"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:enchanted_book"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "modifier": "book",
+     "price": [
+      5,
+      64
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:clock"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:compass"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 3,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:yellow_candle",
+       "minecraft:red_candle"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  }
+ ],
+ "cleric": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:rotten_flesh"
+       ],
+       "count": 32
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:redstone"
+      ],
+      "count": 2
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:gold_ingot"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:lapis_lazuli"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:rabbit_foot"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:glowstone"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:turtle_scute"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:glass_bottle"
+       ],
+       "count": 9
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:ender_pearl"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:nether_wart"
+       ],
+       "count": 22
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:experience_bottle"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  }
+ ],
+ "armorer": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:coal"
+       ],
+       "count": 15
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 7
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_leggings"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_boots"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_helmet"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 9
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_chestplate"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:iron_ingot"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 36
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:bell"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:chainmail_boots"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:chainmail_leggings"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:lava_bucket"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:chainmail_helmet"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:chainmail_chestplate"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:shield"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:diamond"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 14
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_leggings"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 15,
+     "modifier": "enchanted",
+     "price": [
+      19,
+      33
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_boots"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 15,
+     "modifier": "enchanted",
+     "price": [
+      13,
+      27
+     ]
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_helmet"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 30,
+     "modifier": "enchanted",
+     "price": [
+      13,
+      27
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 16
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_chestplate"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 30,
+     "modifier": "enchanted",
+     "price": [
+      21,
+      35
+     ]
+    }
+   ]
+  }
+ ],
+ "butcher": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:chicken"
+       ],
+       "count": 14
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:porkchop"
+       ],
+       "count": 7
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:rabbit"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:rabbit_stew"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:coal"
+       ],
+       "count": 15
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cooked_porkchop"
+      ],
+      "count": 5
+     },
+     "maxUses": 16,
+     "xp": 5
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cooked_chicken"
+      ],
+      "count": 8
+     },
+     "maxUses": 16,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:mutton"
+       ],
+       "count": 7
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:beef"
+       ],
+       "count": 10
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:dried_kelp_block"
+       ],
+       "count": 10
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:sweet_berries"
+       ],
+       "count": 10
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  }
+ ],
+ "cartographer": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:paper"
+       ],
+       "count": 24
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 7
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:glass_pane"
+       ],
+       "count": 11
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:taiga_village_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "map",
+     "biomes": [
+      "swamp",
+      "snow",
+      "plains"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:swamp_hut_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "map",
+     "biomes": [
+      "taiga",
+      "snow",
+      "jungle"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:snowy_village_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "map",
+     "biomes": [
+      "taiga",
+      "swamp"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:savanna_village_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "map",
+     "biomes": [
+      "plains",
+      "jungle",
+      "desert"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:plains_village_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "map",
+     "biomes": [
+      "taiga",
+      "snow",
+      "savanna",
+      "desert"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:jungle_pyramid_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "map",
+     "biomes": [
+      "swamp",
+      "savanna",
+      "desert"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:desert_village_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "map",
+     "biomes": [
+      "savanna",
+      "jungle"
+     ]
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 13
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:ocean_monument_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10,
+     "modifier": "map"
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 12
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:buried_trial_chambers_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10,
+     "modifier": "map"
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 7
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:item_frame"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "snow",
+      "plains"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:orange_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "savanna",
+      "desert"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:magenta_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "savanna"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:blue_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "snow",
+      "taiga"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:light_blue_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "snow",
+      "swamp"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:yellow_banner",
+       "minecraft:brown_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "plains",
+      "jungle"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:lime_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "desert",
+      "taiga"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:pink_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "taiga",
+      "plains"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:gray_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "desert"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cyan_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "desert",
+      "snow"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:purple_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "taiga",
+      "swamp"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:green_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "desert",
+      "savanna",
+      "jungle"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:red_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "snow",
+      "savanna"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:black_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "biomes": [
+      "swamp"
+     ]
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:globe_banner_pattern"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 14
+      },
+      {
+       "items": [
+        "minecraft:compass"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:woodland_mansion_map"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30,
+     "modifier": "map"
+    }
+   ]
+  }
+ ],
+ "fisherman": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:string"
+       ],
+       "count": 20
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:coal"
+       ],
+       "count": 10
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:cod"
+       ],
+       "count": 6
+      },
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cooked_cod"
+      ],
+      "count": 6
+     },
+     "maxUses": 16,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cod_bucket"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:cod"
+       ],
+       "count": 15
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:salmon"
+       ],
+       "count": 6
+      },
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cooked_salmon"
+      ],
+      "count": 6
+     },
+     "maxUses": 16,
+     "xp": 5
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:campfire"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:salmon"
+       ],
+       "count": 13
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:fishing_rod"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 10,
+     "modifier": "enchanted",
+     "price": [
+      8,
+      22
+     ]
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:tropical_fish"
+       ],
+       "count": 6
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:pufferfish"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:oak_boat"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30,
+     "biomes": [
+      "plains"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:spruce_boat"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30,
+     "biomes": [
+      "taiga",
+      "snow"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:jungle_boat"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30,
+     "biomes": [
+      "desert",
+      "jungle"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:acacia_boat"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30,
+     "biomes": [
+      "savanna"
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:dark_oak_boat"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30,
+     "biomes": [
+      "swamp"
+     ]
+    }
+   ]
+  }
+ ],
+ "fletcher": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:stick"
+       ],
+       "count": 32
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:arrow"
+      ],
+      "count": 16
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:gravel"
+       ],
+       "count": 10
+      },
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:flint"
+      ],
+      "count": 10
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:flint"
+       ],
+       "count": 26
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:bow"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:string"
+       ],
+       "count": 14
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:crossbow"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:feather"
+       ],
+       "count": 24
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:bow"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 15,
+     "modifier": "enchanted",
+     "price": [
+      7,
+      21
+     ]
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:tripwire_hook"
+       ],
+       "count": 8
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:crossbow"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 15,
+     "modifier": "enchanted",
+     "price": [
+      8,
+      22
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      },
+      {
+       "items": [
+        "minecraft:arrow"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:tipped_arrow"
+      ],
+      "count": 5
+     },
+     "maxUses": 12,
+     "xp": 30,
+     "modifier": "tipped"
+    }
+   ]
+  }
+ ],
+ "leatherworker": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:leather"
+       ],
+       "count": 6
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:leather_leggings"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1,
+     "modifier": "dyed"
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 7
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:leather_chestplate"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1,
+     "modifier": "dyed"
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:flint"
+       ],
+       "count": 26
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:leather_helmet"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "dyed"
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:leather_boots"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "dyed"
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:rabbit_hide"
+       ],
+       "count": 9
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 7
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:leather_chestplate"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1,
+     "modifier": "dyed"
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:turtle_scute"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 6
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:leather_horse_armor"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15,
+     "modifier": "dyed"
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 6
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:saddle"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:leather_helmet"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5,
+     "modifier": "dyed"
+    }
+   ]
+  }
+ ],
+ "mason": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:clay_ball"
+       ],
+       "count": 10
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:brick"
+      ],
+      "count": 10
+     },
+     "maxUses": 16,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:stone"
+       ],
+       "count": 20
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:chiseled_stone_bricks"
+      ],
+      "count": 4
+     },
+     "maxUses": 16,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:granite"
+       ],
+       "count": 16
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:andesite"
+       ],
+       "count": 16
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:diorite"
+       ],
+       "count": 16
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:dripstone_block"
+      ],
+      "count": 4
+     },
+     "maxUses": 16,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:polished_andesite"
+      ],
+      "count": 4
+     },
+     "maxUses": 16,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:polished_diorite"
+      ],
+      "count": 4
+     },
+     "maxUses": 16,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:polished_granite"
+      ],
+      "count": 4
+     },
+     "maxUses": 16,
+     "xp": 10
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:quartz"
+       ],
+       "count": 12
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_terracotta",
+       "minecraft:orange_terracotta",
+       "minecraft:magenta_terracotta",
+       "minecraft:light_blue_terracotta",
+       "minecraft:yellow_terracotta",
+       "minecraft:lime_terracotta",
+       "minecraft:pink_terracotta",
+       "minecraft:gray_terracotta",
+       "minecraft:light_gray_terracotta",
+       "minecraft:cyan_terracotta",
+       "minecraft:purple_terracotta",
+       "minecraft:blue_terracotta",
+       "minecraft:brown_terracotta",
+       "minecraft:green_terracotta",
+       "minecraft:red_terracotta",
+       "minecraft:black_terracotta"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_glazed_terracotta",
+       "minecraft:orange_glazed_terracotta",
+       "minecraft:magenta_glazed_terracotta",
+       "minecraft:light_blue_glazed_terracotta",
+       "minecraft:yellow_glazed_terracotta",
+       "minecraft:lime_glazed_terracotta",
+       "minecraft:pink_glazed_terracotta",
+       "minecraft:gray_glazed_terracotta",
+       "minecraft:light_gray_glazed_terracotta",
+       "minecraft:cyan_glazed_terracotta",
+       "minecraft:purple_glazed_terracotta",
+       "minecraft:blue_glazed_terracotta",
+       "minecraft:brown_glazed_terracotta",
+       "minecraft:green_glazed_terracotta",
+       "minecraft:red_glazed_terracotta",
+       "minecraft:black_glazed_terracotta"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:quartz_pillar"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:quartz_block"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  }
+ ],
+ "shepherd": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:white_wool",
+        "minecraft:brown_wool",
+        "minecraft:gray_wool",
+        "minecraft:black_wool"
+       ],
+       "count": 18
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:shears"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:white_dye",
+        "minecraft:gray_dye",
+        "minecraft:black_dye",
+        "minecraft:light_blue_dye",
+        "minecraft:lime_dye"
+       ],
+       "count": 12
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_wool",
+       "minecraft:orange_wool",
+       "minecraft:magenta_wool",
+       "minecraft:light_blue_wool",
+       "minecraft:yellow_wool",
+       "minecraft:lime_wool",
+       "minecraft:pink_wool",
+       "minecraft:gray_wool",
+       "minecraft:light_gray_wool",
+       "minecraft:cyan_wool",
+       "minecraft:purple_wool",
+       "minecraft:blue_wool",
+       "minecraft:brown_wool",
+       "minecraft:green_wool",
+       "minecraft:red_wool",
+       "minecraft:black_wool"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 5
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_carpet",
+       "minecraft:orange_carpet",
+       "minecraft:magenta_carpet",
+       "minecraft:light_blue_carpet",
+       "minecraft:yellow_carpet",
+       "minecraft:lime_carpet",
+       "minecraft:pink_carpet",
+       "minecraft:gray_carpet",
+       "minecraft:light_gray_carpet",
+       "minecraft:cyan_carpet",
+       "minecraft:purple_carpet",
+       "minecraft:blue_carpet",
+       "minecraft:brown_carpet",
+       "minecraft:green_carpet",
+       "minecraft:red_carpet",
+       "minecraft:black_carpet"
+      ],
+      "count": 4
+     },
+     "maxUses": 16,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:yellow_dye",
+        "minecraft:light_gray_dye",
+        "minecraft:orange_dye",
+        "minecraft:red_dye",
+        "minecraft:pink_dye"
+       ],
+       "count": 12
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_bed",
+       "minecraft:orange_bed",
+       "minecraft:magenta_bed",
+       "minecraft:light_blue_bed",
+       "minecraft:yellow_bed",
+       "minecraft:lime_bed",
+       "minecraft:pink_bed",
+       "minecraft:gray_bed",
+       "minecraft:light_gray_bed",
+       "minecraft:cyan_bed",
+       "minecraft:purple_bed",
+       "minecraft:blue_bed",
+       "minecraft:brown_bed",
+       "minecraft:green_bed",
+       "minecraft:red_bed",
+       "minecraft:black_bed"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:brown_dye",
+        "minecraft:purple_dye",
+        "minecraft:blue_dye",
+        "minecraft:green_dye",
+        "minecraft:magenta_dye",
+        "minecraft:cyan_dye"
+       ],
+       "count": 12
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 30
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_banner",
+       "minecraft:orange_banner",
+       "minecraft:magenta_banner",
+       "minecraft:light_blue_banner",
+       "minecraft:yellow_banner",
+       "minecraft:lime_banner",
+       "minecraft:pink_banner",
+       "minecraft:gray_banner",
+       "minecraft:light_gray_banner",
+       "minecraft:cyan_banner",
+       "minecraft:purple_banner",
+       "minecraft:blue_banner",
+       "minecraft:brown_banner",
+       "minecraft:green_banner",
+       "minecraft:red_banner",
+       "minecraft:black_banner"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 15
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:painting"
+      ],
+      "count": 3
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  }
+ ],
+ "toolsmith": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:coal"
+       ],
+       "count": 15
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:stone_axe"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:stone_shovel"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:stone_pickaxe"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:stone_hoe"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:iron_ingot"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 36
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:bell"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:flint"
+       ],
+       "count": 30
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_axe"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 10,
+     "modifier": "enchanted",
+     "price": [
+      6,
+      20
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_shovel"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 10,
+     "modifier": "enchanted",
+     "price": [
+      7,
+      21
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_pickaxe"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 10,
+     "modifier": "enchanted",
+     "price": [
+      8,
+      22
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_hoe"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 10
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 12
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_axe"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 15,
+     "modifier": "enchanted",
+     "price": [
+      17,
+      31
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_shovel"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 15,
+     "modifier": "enchanted",
+     "price": [
+      10,
+      24
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:diamond"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 13
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_pickaxe"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 30,
+     "modifier": "enchanted",
+     "price": [
+      18,
+      32
+     ]
+    }
+   ]
+  }
+ ],
+ "weaponsmith": [
+  {
+   "group": "level_1",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:coal"
+       ],
+       "count": 15
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 16,
+     "xp": 2
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_axe"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_sword"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1,
+     "modifier": "enchanted",
+     "price": [
+      7,
+      21
+     ]
+    }
+   ]
+  },
+  {
+   "group": "level_2",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:iron_ingot"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 10
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 36
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:bell"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 5
+    }
+   ]
+  },
+  {
+   "group": "level_3",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:flint"
+       ],
+       "count": 24
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "group": "level_4",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 12
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_axe"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 15,
+     "modifier": "enchanted",
+     "price": [
+      17,
+      31
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:diamond"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "group": "level_5",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 8
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:diamond_sword"
+      ],
+      "count": 1
+     },
+     "maxUses": 3,
+     "xp": 30,
+     "modifier": "enchanted",
+     "price": [
+      13,
+      27
+     ]
+    }
+   ]
+  }
+ ],
+ "wandering_trader": [
+  {
+   "group": "buying",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:potion"
+       ],
+       "count": 1,
+       "potion": "minecraft:water"
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 2,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:water_bucket",
+        "minecraft:milk_bucket"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 2
+     },
+     "maxUses": 2,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:fermented_spider_eye"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 3
+     },
+     "maxUses": 2,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:baked_potato"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 2,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:hay_block"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:emerald"
+      ],
+      "count": 1
+     },
+     "maxUses": 2,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "common",
+   "amount": 5,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:white_dye",
+       "minecraft:orange_dye",
+       "minecraft:magenta_dye",
+       "minecraft:light_blue_dye",
+       "minecraft:yellow_dye",
+       "minecraft:lime_dye",
+       "minecraft:pink_dye",
+       "minecraft:gray_dye",
+       "minecraft:light_gray_dye",
+       "minecraft:cyan_dye",
+       "minecraft:purple_dye",
+       "minecraft:blue_dye",
+       "minecraft:brown_dye",
+       "minecraft:green_dye",
+       "minecraft:red_dye",
+       "minecraft:black_dye",
+       "minecraft:shelf_mushroom"
+      ],
+      "count": 3
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:tropical_fish_bucket",
+       "minecraft:pufferfish_bucket"
+      ],
+      "count": 1
+     },
+     "maxUses": 4,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:sea_pickle",
+       "minecraft:glowstone"
+      ],
+      "count": 1
+     },
+     "maxUses": 5,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 4
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:slime_ball"
+      ],
+      "count": 1
+     },
+     "maxUses": 5,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:nautilus_shell"
+      ],
+      "count": 1
+     },
+     "maxUses": 5,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:fern",
+       "minecraft:dandelion",
+       "minecraft:poppy",
+       "minecraft:allium",
+       "minecraft:azure_bluet",
+       "minecraft:red_tulip",
+       "minecraft:orange_tulip",
+       "minecraft:white_tulip",
+       "minecraft:pink_tulip",
+       "minecraft:oxeye_daisy",
+       "minecraft:cornflower",
+       "minecraft:wheat_seeds",
+       "minecraft:beetroot_seeds",
+       "minecraft:pumpkin_seeds",
+       "minecraft:melon_seeds",
+       "minecraft:wildflowers",
+       "minecraft:tall_dry_grass"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:sugar_cane",
+       "minecraft:blue_orchid"
+      ],
+      "count": 1
+     },
+     "maxUses": 8,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:pumpkin"
+      ],
+      "count": 1
+     },
+     "maxUses": 4,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:kelp",
+       "minecraft:firefly_bush"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:cactus",
+       "minecraft:brain_coral_block",
+       "minecraft:bubble_coral_block",
+       "minecraft:fire_coral_block",
+       "minecraft:horn_coral_block",
+       "minecraft:tube_coral_block"
+      ],
+      "count": 1
+     },
+     "maxUses": 8,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:lily_of_the_valley",
+       "minecraft:open_eyeblossom"
+      ],
+      "count": 1
+     },
+     "maxUses": 7,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:acacia_sapling",
+       "minecraft:birch_sapling",
+       "minecraft:dark_oak_sapling",
+       "minecraft:jungle_sapling",
+       "minecraft:oak_sapling",
+       "minecraft:spruce_sapling",
+       "minecraft:cherry_sapling",
+       "minecraft:pale_oak_sapling",
+       "minecraft:mangrove_propagule",
+       "minecraft:poplar_sapling"
+      ],
+      "count": 1
+     },
+     "maxUses": 8,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:vine",
+       "minecraft:pale_hanging_moss",
+       "minecraft:brown_mushroom",
+       "minecraft:red_mushroom"
+      ],
+      "count": 3
+     },
+     "maxUses": 4,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:lily_pad"
+      ],
+      "count": 5
+     },
+     "maxUses": 2,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:small_dripleaf",
+       "minecraft:pointed_dripstone",
+       "minecraft:sulfur_spike",
+       "minecraft:rooted_dirt",
+       "minecraft:moss_block",
+       "minecraft:pale_moss_block"
+      ],
+      "count": 2
+     },
+     "maxUses": 5,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:sand"
+      ],
+      "count": 8
+     },
+     "maxUses": 8,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:red_sand"
+      ],
+      "count": 4
+     },
+     "maxUses": 6,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 2
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:golden_dandelion"
+      ],
+      "count": 1
+     },
+     "maxUses": 12,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:name_tag"
+      ],
+      "count": 1
+     },
+     "maxUses": 5,
+     "xp": 1
+    }
+   ]
+  },
+  {
+   "group": "uncommon",
+   "amount": 2,
+   "trades": [
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:packed_ice"
+      ],
+      "count": 1
+     },
+     "maxUses": 6,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 6
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:blue_ice"
+      ],
+      "count": 1
+     },
+     "maxUses": 6,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:gunpowder"
+      ],
+      "count": 4
+     },
+     "maxUses": 2,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 3
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:podzol"
+      ],
+      "count": 3
+     },
+     "maxUses": 6,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:acacia_log",
+       "minecraft:birch_log",
+       "minecraft:dark_oak_log",
+       "minecraft:jungle_log",
+       "minecraft:oak_log",
+       "minecraft:spruce_log",
+       "minecraft:cherry_log",
+       "minecraft:mangrove_log",
+       "minecraft:pale_oak_log",
+       "minecraft:poplar_log"
+      ],
+      "count": 8
+     },
+     "maxUses": 4,
+     "xp": 1
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 1
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:iron_pickaxe"
+      ],
+      "count": 1
+     },
+     "maxUses": 1,
+     "xp": 1,
+     "modifier": "enchanted",
+     "price": [
+      6,
+      20
+     ]
+    },
+    {
+     "wants": [
+      {
+       "items": [
+        "minecraft:emerald"
+       ],
+       "count": 5
+      }
+     ],
+     "gives": {
+      "items": [
+       "minecraft:potion"
+      ],
+      "count": 1,
+      "potion": "minecraft:long_invisibility"
+     },
+     "maxUses": 1,
+     "xp": 1
+    }
+   ]
+  }
+ ]
+}

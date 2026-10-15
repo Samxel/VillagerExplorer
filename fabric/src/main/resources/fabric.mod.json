@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${description}",
+  "authors": ["${mod_author}"],
+  "contact": {
+    "sources": "https://github.com/Samxel/VillagerExplorer",
+    "issues": "https://github.com/Samxel/VillagerExplorer/issues"
+  },
+  "license": "${license}",
+  "icon": "assets/villagerexplorer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.samxel.villagerexplorer.fabric.VillagerExplorerFabric"
+    ],
+    "modmenu": [
+      "com.samxel.villagerexplorer.fabric.VillagerExplorerModMenu"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

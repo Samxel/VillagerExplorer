@@ -1,0 +1,57 @@
+plugins {
+    id 'java-library'
+}
+
+base {
+    archivesName = "${mod_name}-${project.name}-${minecraft_version}"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(java_version)
+    withSourcesJar()
+}
+
+repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'TerraformersMC'
+                url = uri('https://maven.terraformersmc.com/releases')
+            }
+        }
+        filter {
+            includeGroup('com.terraformersmc')
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Jar).configureEach {
+    from(rootProject.file('LICENSE.txt')) {
+        rename { "${it}_${mod_name}" }
+    }
+}
+
+processResources {
+    var expandProps = [
+            'version'                : version,
+            'minecraft_version'      : minecraft_version,
+            'minecraft_version_range': minecraft_version_range,
+            'fabric_loader_version'  : fabric_loader_version,
+            'mod_name'               : mod_name,
+            'mod_author'             : mod_author,
+            'mod_id'                 : mod_id,
+            'license'                : license,
+            'description'            : project.description,
+            'neoforge_version'       : neoforge_version
+    ]
+
+    filesMatching(['META-INF/neoforge.mods.toml', 'fabric.mod.json']) {
+        expand expandProps
+    }
+
+    inputs.properties(expandProps)
+}

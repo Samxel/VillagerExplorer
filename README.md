@@ -2,7 +2,7 @@
   <img src="https://github.com/user-attachments/assets/c3c52df9-fb44-42e5-8653-2c1a0a9b5cd8" alt="villagerexplorer_header" width="256""/>
 </p>
 
-<h1 align="center">Villager Explorer<br>26.3 (Fabric)</h1>
+<h1 align="center">Villager Explorer<br>26.3 (Fabric &amp; NeoForge)</h1>
 
 <p align="center">
   <b>Available at:</b><br>
@@ -36,7 +36,19 @@
   View all available trades for the villager, including trade items, costs, and rewards.
 
 - **Item Tooltips**  
-  Hover over items in the crafting grid, job site, or trade list to see their vanilla tooltips, just like in your inventory.
+  Hover over items in the crafting grid, job site, or trade list to see their vanilla tooltips plus max uses, villager XP, price ranges and random effects.
+
+- **Search by Job, Villager or Item**  
+  Find out who sells or buys an item, a job site block or even an enchantment (e.g. `mending`). Matching trades are highlighted.
+
+- **Villager Biomes**  
+  Switch the villager skin per biome and see which trades only certain biomes offer (boats, banners, explorer maps).
+
+- **Wandering Trader**  
+  Browse everything the wandering trader can buy and sell, including how many offers of each group he picks.
+
+- **Four GUI Styles**  
+  Classic, Vanilla, Modern and Refined. The GUI also shrinks to fit small screens and high GUI scales.
 
 ---
 
@@ -59,5 +71,16 @@
   You can configure the keybind via Minecraft’s controls menu.
 
 - **GUI Styles**  
-  Switch between four looks with `/villagerexplorer style <classic|vanilla|modern|refined>`.  
+  Pick a style via Mod Menu (Fabric), the NeoForge mod list, `/villagerexplorer style` or directly with `/villagerexplorer style <classic|vanilla|modern|refined>`.  
   The choice is saved to `config/villagerexplorer.properties`. `/villagerexplorer` opens the GUI.
+
+---
+
+## Development
+
+This branch uses a MultiLoader setup: `common` holds the shared code, `fabric` and `neoforge` only contain the loader entrypoints.
+
+- `./gradlew build` builds both jars into `fabric/build/libs` and `neoforge/build/libs`.
+- `./gradlew :fabric:runClient` / `./gradlew :neoforge:runClient` start a dev client.
+- Trades are generated from the vanilla data in the Minecraft jar:  
+  `python tools/generate_trades.py <minecraft.jar> common/src/main/resources/assets/villagerexplorer/trades.json`

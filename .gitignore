@@ -1,10 +1,9 @@
-# Project exclude paths
-/.gradle/
-/build/
-/run/
-/bin
-/.settings
-/.project
-/.factorypath
-/.classpath
-/.idea/
+.gradle/
+build/
+run/
+runs/
+bin/
+.idea/
+.settings
+.project
+.classpath
